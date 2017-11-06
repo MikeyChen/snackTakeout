@@ -3,14 +3,15 @@
 .top{display: flex;flex-flow: row;font-size:28rpx;background: #7be22a;color:#fff;padding:0 5%;border-top:2px solid #f5f5f5;}
 .top image{width:160rpx;height:160rpx;border-radius: 50%;position: relative;top:4rpx;}
 .top .shop_info{margin-left:20rpx;}
+.top .shop_info .notice image{width:48rpx;height:48rpx;position: relative;top:-5rpx;}
 .top .shop_info view{margin-top:15rpx}
 /* 商家菜品 */
-.foodList{display: flex;flex-direction: row;width:100%;font-size:28rpx;}
+.foodList{display: flex;flex-direction: row;width:99.5%;font-size:28rpx;}
 .foodType{height:100%;width:30%;background: #f4f4f4;}
 .foodType .pub{background: #f4f4f4;text-align: center;padding:40rpx 0;border-bottom:1px solid #fff;color:#666666;}
 .foodType .bgWhite{background:#fff;border-left:3px solid #f4f4f4;}
-.foodDetail{height:100%;width:68%;margin-left:2%;}
-.foodDetail .type{width:96%;padding:15rpx 2%;color:#636363;border-left:3px solid #7be22a;margin:15rpx 0;}
+.foodDetail{height:100%;width:67.7%;margin-left:2%;}
+.foodDetail .type{width:95%;padding:15rpx 2%;color:#636363;border-left:3px solid #7be22a;margin:15rpx 0;}
 .foodDetail .box{margin-left:0rpx;color:#8d8d8d;}
 .foodDetail .box .food image{width:100%;height:124rpx;}
 .foodDetail .box .food{display: flex;align-items: center;position: relative;padding:20rpx 0;border-bottom:1px solid #e7e5e6;padding-bottom:78rpx;}
@@ -27,12 +28,12 @@
 .foodDetail .btn text.add{width:60rpx;height:60rpx;border:1px solid #7be22a;border-radius: 50%;display:inline-flex;justify-content: center;align-items: center;color:#fff;background: #7be22a;}
 .foodDetail .btn text.num{margin:0 15rpx;}
 /* 点击购物车的提示框 */
-.cartTip{background: #fff;border:1px solid #dbdbdb;padding:20rpx;font-size:28rpx;position: absolute;bottom:84rpx;left:0;width:94%;display: none;z-index: 402;}
+.cartTip{background: #fff;border:1px solid #dbdbdb;padding:20rpx;font-size:28rpx;position: absolute;bottom:84rpx;left:0;width:94.5%;display: none;z-index: 402;}
 .cartTip view{padding:20rpx 0;position: relative;}
 .cartTip view text.r{position: absolute;right:0;top:25%;}
 .cartTip view text.price{right:33%;top:15%;}
 .cartTip view.foodName{border-bottom:1px solid #dbdbdb;}
-.cartTip .btn{position: absolute;right:0%;top:-26%;}
+.cartTip .btn{position: absolute;right:0%;top:-26%;z-index: 450;}
 .cartTip .btn text{display: inline-block;} 
 .cartTip .btn text.reduce{width:60rpx;height:60rpx;border:1px solid #e4e4e4;border-radius: 50%;display:inline-flex;justify-content: center;align-items: center;}
 .cartTip .btn text.line{display: block;width:20rpx;height:4rpx;background: #afafaf;}

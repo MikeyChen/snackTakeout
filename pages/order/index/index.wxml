@@ -8,6 +8,7 @@
         <view class='name'>老三家曲靖蒸饵丝校场路店</view>
         <view class='tip'>起送￥20  |  配送￥6</view>
         <view  class='notice'>公告：欢迎光临老三家曲靖欢迎光临</view>
+        <!-- <image src='/imgs/tips.gif'></image>： -->
     </view>
 </view><!--top结束-->
 <view class='foodList'>
@@ -26,7 +27,7 @@
                 <view class='img'>
                     <image src='/imgs/food.jpg'></image>
                 </view>
-                 <view class='info'>
+                 <view class='info' bindtap='shopDetail'>
                     <view class='name'>炒拉面</view>
                     <view class='ct'>主菜210g+时蔬+咸菜+米饭咸菜+米饭</view>
                     <view class='price'>￥{{price}}/份</view>
@@ -58,7 +59,7 @@
     </view><!--foodDetail-->
 </view><!--foodList结束-->
 <!-- 点击购物车的提示框 -->
-<view class='cartTip {{show}}' bindtap="hidCart">
+<view class='cartTip {{show}}' >
     <view class='foodName'>
         <text class='l'>杀猪菜</text><text class='r price'>￥{{sum}}</text>
         <view class='btn'>
@@ -70,7 +71,7 @@
     <view><text class='l'>餐盒费</text><text class='r'>￥1</text></view>
 </view><!--cartTip-->
 <!-- 遮罩层 -->
-<view class='shade {{shadeShow}}' style='height:{{height}}px;width:{{width}}px'></view>
+<view class='shade {{shadeShow}}' style='height:{{height}}px;width:{{width}}px' bindtap="hidCart"></view>
 
 <!-- 底部购物车 -->
 <view class='cart'>

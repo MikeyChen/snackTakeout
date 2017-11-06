@@ -106,6 +106,12 @@ hidCart:function(){
     })
   }
 },
+// //点击显示详情
+// showDetail:function(){
+//   wx.navigateTo({
+//     url: '/pages/order/orderDetail/index',
+//   })
+// },
   /**
    * 生命周期函数--监听页面加载
    */

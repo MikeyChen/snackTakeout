@@ -8,8 +8,8 @@
    </view>
     <view class='box line'>
       <image src='/imgs/time_icon.png'></image>
-      <text class='word time'>立即送出(大约10：30送达）</text>
-      <text class='arrow'>></text>
+      <text class='word time'>立即送出(大约{{hour}} ： {{sendTime}}送达）</text>
+      <!-- <text class='arrow'>></text> -->
    </view>
 </view><!--addAddress结束-->
 <!-- 点餐内容 -->

@@ -20,8 +20,8 @@
             <view class='price'>￥73</view>
         </view>
         <view class='btns'>
-            <view class='again'>在来一单</view>
-            <view>立即付款</view>
+            <view class='again' bindtap='again'>在来一单</view>
+            <view bindtap='pay'>立即付款</view>
         </view>
     </view><!--order结束-->
     <view class='order'>

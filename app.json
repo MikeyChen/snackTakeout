@@ -1,13 +1,17 @@
 {
   "pages": 
   [
-    
+   
     "pages/index/index",
+    "pages/order/index/index",
+    "pages/order/orderDetail/index",
+    "pages/order/orderPay/index",
+    "pages/order/addOrder/index",
     "pages/order/orderList/index",
     "pages/address/editAddress/index",
     "pages/address/addressList/index",
-    "pages/order/addOrder/index",
-    "pages/order/index/index",
+   
+    
     "pages/shop/index",
     "pages/me/phone/index",
     

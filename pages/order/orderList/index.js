@@ -20,6 +20,18 @@ Page({
       animation: animation
     })
   },
+  //支付
+  pay:function(){
+    wx.navigateTo({
+      url: '/pages/order/orderPay/index',
+    })
+  },
+  //点击再来一单按钮
+  again:function(){
+    wx.navigateTo({
+      url:'/pages/order/index/index'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

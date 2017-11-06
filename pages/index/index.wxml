@@ -19,7 +19,7 @@
 </view>
 <!-- 商家列表 -->
 <view class='shopList'>
-   <view class='shop' bindtap='jump'>
+   <view class='shop' bindtap='jump' >
      <view class='l'>
         <image src='/imgs/flower1.png'></image>
      </view>
@@ -28,7 +28,7 @@
         <view class='grey'></view>
         <view class='dis'>
           <text>距离：</text>
-          <text>5.7698km</text>
+          <text>{{distance}}km</text>
         </view>
      </view> 
    </view><!--shop-->

@@ -13,7 +13,7 @@ Page({
       '/imgs/circle_2.jpg',
       '/imgs/circle_3.jpg'
     ],
-    shopAddress:"云南省昆明火车站",
+    shopAddress:"云南省昆明市西山区H公寓",
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
@@ -25,15 +25,15 @@ Page({
   },
   //点击跳转到相应的店铺点餐页面
   jump:function(){
+    var that=this;
     wx.navigateTo({
       url: '/pages/order/index/index',
     })
   },
   onLoad: function () {
     var that=this;
-    console.log('----');
-    console.log(that.data);
-    console.log(that.data.shoplat);
+    // console.log(that.data);
+    // console.log(that.data.shoplat);
     //地址解析，把地址解析成经纬度
     qqmapsdk.geocoder({
       address: that.data.shopAddress,
@@ -43,33 +43,43 @@ Page({
         that.setData({
           shoplng: res.result.location.lng,
           shoplat: res.result.location.lat,
-        })
+        });
+        //计算距离
+        qqmapsdk.calculateDistance({
+          mode:'driving',
+          to: [
+            {
+              latitude: that.data.shoplat,
+              longitude: that.data.shoplng,
+            }
+          ],
+          success: function (res) {
+            console.log(res);
+            var far = res.result.elements[0].distance / 1000;
+            var duration = (res.result.elements[0].duration)/60;
+            var sendTime = Math.round(duration);
+           
+            wx.setStorage({
+              key: 'sendTime',
+              data: sendTime,
+            })
+            that.setData({
+              distance: far.toFixed(2),//距离保留两位小数 
+            }); 
+          },
+          fail: function (res) {
+            console.log("fail");
+            that.setData({
+              distance: '超过10'
+            });
+          },
+        });
       },
       fail: function (res) {
-        // console.log(res);
+        console.log(fail);
       }
     });
-    //计算距离
-    // console.log("昆明站经纬度");
-    // console.log(that.data);
-    // console.log(that.data.shoplat);
-    qqmapsdk.calculateDistance({
-
-      to: [
-        {
-          latitude: that.data.shoplat,
-          longitude: that.data.shoplng,
-        }
-      ],
-      success: function (res) {
-        console.log("success");
-        console.log(res);
-      },
-      fail: function (res) {
-        console.log("fali");
-        console.log(res);
-      },
-    });
+   
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -96,15 +106,7 @@ Page({
         }
       })
     }
-    // wx.getLocation({
-    //   type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-    //   success: function (res) {
-    //     that.setData({
-    //       personlng: res.longitude,
-    //       personlat: res.longitude,
-    //     })
-    //   }
-    // })
+    
     
    
     
