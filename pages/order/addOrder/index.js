@@ -39,6 +39,7 @@ Page({
         var allTime = res.data + seconds;
         console.log(allTime);
         if (allTime>=60){
+          hour++;
           allTime=allTime-60;
         }
         that.setData({

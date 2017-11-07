@@ -9,7 +9,22 @@ App({
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: 'http://www.diancan.com/weixin.php/wechat/getOPenid', //仅为示例，并非真实的接口地址
+          data: {
+            errMsg: res.errMsg,
+            code: res.code,
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          method: "POST",
+          success: function (res) {
+            if (res.data.code == 0) {
+              wx.setStorageSync("openid", res.data.openid);
+            }
+          }
+        })// 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
     // 获取用户信息

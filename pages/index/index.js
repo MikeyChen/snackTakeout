@@ -98,20 +98,44 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
+          wx.request({
+            url: 'http://www.diancan.com/weixin.php/wechat/saveUserinfo', //仅为示例，并非真实的接口地址
+            data: {
+              rawData: res.rawData,
+              openid: wx.getStorageSync('openid'),
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            method: 'POST',
+            success: function (res) {
+              if (res.data.code == 0) {
+                console.log(res.data.info);
+              }
+            }
+          })
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-        }
+        },
       })
     }
-    
-    
-   
-    
+    // wx.getLocation({
+    //   type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+    //   success: function (res) {
+    //     that.setData({
+    //       personlng: res.longitude,
+    //       personlat: res.longitude,
+    //     })
+    //   }
+    // })
+
+
+
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
