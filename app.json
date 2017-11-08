@@ -1,9 +1,10 @@
 {
   "pages": 
   [
-    "pages/index/index",
-   "pages/order/index/index",
     
+   
+    "pages/index/index",
+    "pages/order/index/index",
     "pages/order/orderDetail/index",
     "pages/order/orderPay/index",
     "pages/order/addOrder/index",
@@ -15,7 +16,7 @@
     "pages/shop/index",
     "pages/me/phone/index",
     
-    "pages/me/index/index"
+    "pages/me/index/index" 
   ],
   "window": {
     "backgroundTextStyle": "light",

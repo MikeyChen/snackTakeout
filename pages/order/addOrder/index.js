@@ -41,6 +41,9 @@ Page({
         if (allTime>=60){
           hour++;
           allTime=allTime-60;
+          if (allTime<=9){
+            allTime="0"+allTime;
+          }
         }
         that.setData({
             sendTime:allTime,

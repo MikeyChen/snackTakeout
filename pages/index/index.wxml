@@ -19,43 +19,22 @@
 </view>
 <!-- 商家列表 -->
 <view class='shopList'>
-   <view class='shop' bindtap='jump' >
+<block wx:for="{{shopList}}" wx:key="" wx:for-item="shop">
+   <view class='shop' bindtap='jump' data-id="{{shop.id}}">
      <view class='l'>
-        <image src='/imgs/flower1.png'></image>
+         <image src='/imgs/flower1.png' class='flower'></image>
+         <image src='{{webSite}}{{shop.img}}'></image>
      </view>
      <view class='r'>
-        <text class='word'>老三家曲靖蒸饵丝万达店老三家曲靖蒸饵丝万达店</text>
+        <text class='word'>{{shop.store_name}}</text>
         <view class='grey'></view>
         <view class='dis'>
           <text>距离：</text>
           <text>{{distance}}km</text>
         </view>
      </view> 
+    
    </view><!--shop-->
-   <view class='shop'>
-     <view class='l'>
-        <image src='/imgs/flower1.png'></image>
-     </view>
-     <view class='r'>
-        <text class='word'>老三家曲靖蒸饵丝万达店老三家曲靖蒸饵丝万达店</text>
-        <view class='grey'></view>
-        <view class='dis'>
-          <text>距离：</text>
-          <text>5.7698km</text>
-        </view>
-     </view> 
-   </view><!--shop-->
-   <view class='shop'>
-     <view class='l'>
-        <image src='/imgs/flower1.png'></image>
-     </view>
-     <view class='r'>
-        <text class='word'>老三家曲靖蒸饵丝万达店老三家曲靖蒸饵丝万达店</text>
-        <view class='grey'></view>
-        <view class='dis'>
-          <text>距离：</text>
-          <text>5.7698km</text>
-        </view>
-     </view> 
-   </view><!--shop-->
+  
+   </block>
 </view><!--shopList-->

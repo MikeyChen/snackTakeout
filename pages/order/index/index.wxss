@@ -5,27 +5,15 @@
 .top .shop_info{margin-left:20rpx;}
 .top .shop_info .notice image{width:48rpx;height:48rpx;position: relative;top:-5rpx;}
 .top .shop_info view{margin-top:15rpx}
-.top .shop_info view.notice{width:100%;overflow: hidden; position: relative;margin-rigth:20rpx;}
-.top .shop_info .word{ white-space: nowrap;animation: animation  8s linear infinite;width:100%;padding:40px;}
+.top .shop_info view.notice{width:100%;overflow: hidden; margin-rigth:20rpx;}
+.top .shop_info .word{ white-space: nowrap;animation: animation  10s linear infinite;width:100%;padding:40px;position: relative;top:0;left:0;}
  @keyframes animation{
-  0%{
-   margin-left:0;
-  }
-  20%{
-    margin-left:-20%;
-  }
-  40%{
-    margin-left:-40%;
-  }
-  60%{
-  margin-left:-60%;
-  }
-  80%{
-   margin-left:-80%;
-  }
-  100%{
-  margin-left:-100%;
-  }
+  from {
+	left:0px;
+}
+to {
+	left:-100%;
+}
 } 
 /* 商家菜品 */
 .foodList{display: flex;flex-direction: row;width:99.5%;font-size:28rpx;}
