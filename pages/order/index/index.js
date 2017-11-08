@@ -22,19 +22,27 @@ Page({
    var nums=that.data.num;
    var singlePrice = e.currentTarget.dataset.price;
    var id = e.currentTarget.dataset.id;
-   //console.log("添加按钮");
-  // console.log(id);
+   var arr=[];
+   console.log("添加按钮");
+  console.log(id);
    var typeList = that.data.typeList;
    typeList.forEach(function(val,key){
+     console.log(val.dish_id);
       if(val.dish_id==id){
+        nums++;
+        arr.push(nums);
         that.setData({
-          num: nums + 1,
+          num: arr[0],
           sum: ((nums + 1) * singlePrice).toFixed(2),//输出结果保留两位小数
-          id:id
+          id: id
         })
+      }else{
+        console.log("3333333333");
       }
    })
-   //console.log(id);
+   
+  //  console.log("数组");
+  //  console.log(arr);
    
  },
  //点击减少购餐数量

@@ -33,7 +33,7 @@
                  <view class='btn'>
                     <!-- <text class='line'></text> -->
                     <text class='reduce' bindtap="reduce" data-price="{{food.price}}" data-id="{{food.dish_id}}">-</text>
-                    <text class='num'>{{food.dish_id==id?num:'0'}}</text>
+                    <text class='num'>{{num}}</text>
                     <text class='add' bindtap="add" data-price="{{food.price}}" data-id="{{food.dish_id}}">+</text>
                 </view>  
             </view><!--food结束-->
