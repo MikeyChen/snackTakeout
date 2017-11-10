@@ -21,7 +21,7 @@ App({
           method: "POST",
           success: function (res) {
             if (res.data.code == 0) {
-              wx.setStorageSync("openid", res.data.openid);
+              wx.setStorageSync("weixin_user_id", res.data.weixin_user_id);
             }
           }
         })// 发送 res.code 到后台换取 openId, sessionKey, unionId

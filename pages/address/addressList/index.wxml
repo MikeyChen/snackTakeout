@@ -1,20 +1,22 @@
 <!--pages/address/addressList/index.wxml-->
 <view class='addAddress'>
-   <view class='box' bindtap='addAddr'>
+   <view class='box' bindtap='addAddr' data-obj="">
       <image src='/imgs/add_icon.png'></image>
       <text class='word'>新增收货地址</text>
       <text class='arrow'>></text>
    </view>
 </view><!--addAddress结束-->
 <view class='list'>
-    <view class='address' bindtap='addAddr'>
-        <view>万达.昆明双塔南塔（2号门） 2508</view>
-        <view>梦琪 女士 123456789</view>
-        <view class='img'><image src='/imgs/edit_icon.png'></image></view>
-    </view><!--address-->
+  <block wx:for="{{addressList}}" wx:key="" wx:for-item="address">
     <view class='address' >
-        <view>万达.昆明双塔南塔（2号门） 2508</view>
-        <view>梦琪 女士 123456789</view>
-        <view class='img' ><image src='/imgs/edit_icon.png'></image></view>
+       <icon  type="success" color="{{address.id==id?green:grey}}"  bindtap='selected' data-id="{{address.id}}"/>
+        <view>{{address.address}} {{address.street}}</view>
+        <view>{{address.name}} 女士 {{address.phone}}</view>
+        <view class='img' bindtap='editAddr' data-obj="{{address}}"><image src='/imgs/edit_icon.png' ></image></view>
     </view><!--address-->
+  </block>
 </view><!--list-->
+<view class='btn' bindtap='confirm'>
+  确定
+</view>
+

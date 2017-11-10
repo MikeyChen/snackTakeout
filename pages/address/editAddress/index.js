@@ -1,24 +1,70 @@
 // pages/address/editAddress/index.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    items: [
-      { name: 'man', value: '先生',checked: 'true'  },
-      { name: 'woman', value: '女士', },
-    ]
+  
   },
-  //性别选择
-  radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+  //点击确定按钮
+  formSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value);
+    var editAddress=e.detail.value;
+    var that=this;
+    //表单内容为空校验
+    if (editAddress.phone.length == 0 || editAddress.name.length == 0 || editAddress.address.length == 0 || editAddress.street.length==0 || editAddress.sex.length==0){
+      wx.showModal({
+        title: '提示',
+        content: '请确保所有信息已填完整',
+        success: function (res) {
+        }
+      })
+    }
+    else{
+      //请求接口
+    wx.request({
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'post',
+      url: app.globalData.webSite + '/weixin.php/wechat/addressadd',
+      data: {
+        phone: editAddress.phone,
+        name: editAddress.name,
+        sex: editAddress.sex,
+        address: editAddress.address,
+        street: editAddress.street,
+        weixin_user_id:wx.getStorageSync("weixin_user_id")
+      },
+     
+      success: function (res) {
+        console.log("scuesss");
+        if (res.data.code == 0) {
+          console.log(res);
+          wx.navigateBack();
+        }
+      },
+    })
+    }
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that=this;
+    if(options.obj==''){
+      that.setData({
+        address: [],
+      })
+    }else{
+      that.setData({
+        address: JSON.parse(options.obj),
+      })
+    } 
+    //console.log(that.data.address);
   },
 
   /**

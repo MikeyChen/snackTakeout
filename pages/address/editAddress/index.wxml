@@ -1,24 +1,27 @@
 <!--pages/address/editAddress/index.wxml-->
+<form bindsubmit="formSubmit">
 <view class='contacts'>联系人</view>
 <!-- 联系人信息 -->
 <view class='info'>
-    <view class='name'>姓名：<input type='text' placeholder='请输入姓名'/></view>
+    <view class='name'>姓名：<input type='text' placeholder='请输入姓名' value="{{address.name}}" name="name"/></view>
     <view class='sex'>
-      <radio-group class="radio-group" bindchange="radioChange">
-        <label class="radio" wx:for="{{items}}">
-          <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-        </label>
-      </radio-group>
+      <radio-group name="sex">
+        <label><radio value="0" checked="{{address.sex==0?true:false}}"/>先生</label>
+        <label><radio value="1" checked="{{address.sex==1?true:false}}"/>女士</label>
+     </radio-group>
     </view><!--sex结束-->
-    <view class='phone'>手机：<input type='text' placeholder='请输入收货手机号码'/></view>
+    <view class='phone'>手机：<input type='number' placeholder='请输入收货手机号码' value="{{address.phone}}" name="phone"/></view>
 </view><!--info-->
 <view class='contacts'>收货地址</view>
-<view class='info'>
-    <view class='name'>小区/大厦/学校：<input type='text' placeholder='请输入地址'/></view>
-    <view class='phone card'>楼号/门牌号：<input type='text' placeholder='例如：16号楼417室'/></view>
+<view class='info' id='address'>
+    <view class='name'>小区/大厦/学校<input type='text' placeholder='请输入地址' value='{{address.address}}' name="address" /></view>
+    <view class='phone card'>楼号/门牌号<input type='text' placeholder='例如：16号楼417室' value="{{address.street}}" name="street"/></view>
 </view><!--info-->
-
-<view class='btn'>
+<!-- <view class='btn' bindtap='submit'>
   确定
-</view>
+</view> -->
+ <view class="btn-area">
+    <button formType="submit">确定</button>
+  </view>
+</form>
 

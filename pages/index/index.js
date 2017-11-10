@@ -28,7 +28,7 @@ Page({
   jump: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id;
-    console.log(id);
+    //console.log(id);
     wx.navigateTo({
       url: '/pages/order/index/index?id=' + id,
     })
@@ -36,14 +36,10 @@ Page({
   onLoad: function () {
     //var shopList=[];
     var that = this;
-    // console.log(that.data);
-    // console.log(that.data.shoplat);
     //地址解析，把地址解析成经纬度
     qqmapsdk.geocoder({
       address: that.data.shopAddress,
       success: function (res) {
-        //console.log("昆明站");
-        //console.log(res.result.location);
         that.setData({
           shoplng: res.result.location.lng,
           shoplat: res.result.location.lat,
@@ -106,7 +102,7 @@ Page({
             url: 'http://192.168.3.172/weixin.php/wechat/saveUserinfo', //仅为示例，并非真实的接口地址
             data: {
               rawData: res.rawData,
-              openid: wx.getStorageSync('openid'),
+              openid: wx.getStorageSync('weixin_user_id'),
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded' // 默认值
@@ -134,13 +130,11 @@ Page({
       method: 'get',
       url: app.globalData.webSite + '/weixin.php/wechat/getstore',
       success: function (res) {
-        console.log("请求接口");
-        //console.log(res.data);
         that.setData({
           shopList: res.data
         })
 
-        console.log(that.data.shopList);
+        //console.log(that.data.shopList);
       },
     })
 

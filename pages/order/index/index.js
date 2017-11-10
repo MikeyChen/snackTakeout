@@ -14,72 +14,76 @@ Page({
     flag:true,
     shadeShow:"",
     colorNum:0,
-    webSite: app.globalData.webSite,
+    webSite: app.globalData.webSite, 
+    arrInfo:[],
+    allPrice:0,
+    typeList:[],
+    totalPrice:0,
+    allNum:0
+  },
+  //计算总价，总数
+  getTotalPrice() {
+    let typeList = this.data.typeList;                  // 获取购物车列表
+    let total = 0;
+    let numbers=0;
+    for (let i = 0; i < typeList.length; i++) {         // 循环列表得到每个数据
+      total += typeList[i].flag * typeList[i].price;
+      numbers += typeList[i].flag;     // 所有价格加起来 
+    }
+    this.setData({                                // 最后赋值到data中渲染到页面
+      typeList: typeList,
+      totalPrice: total.toFixed(2),
+      allNum: numbers
+    });
   },
   //点击添加购餐数量
- add:function(e){
-   var that=this;
-   var nums=that.data.num;
-   var singlePrice = e.currentTarget.dataset.price;
-   var id = e.currentTarget.dataset.id;
-   var arr=[];
-   console.log("添加按钮");
-  console.log(id);
-   var typeList = that.data.typeList;
-   typeList.forEach(function(val,key){
-     console.log(val.dish_id);
-      if(val.dish_id==id){
-        nums++;
-        arr.push(nums);
-        that.setData({
-          num: arr[0],
-          sum: ((nums + 1) * singlePrice).toFixed(2),//输出结果保留两位小数
-          id: id
-        })
-      }else{
-        console.log("3333333333");
-      }
-   })
-   
-  //  console.log("数组");
-  //  console.log(arr);
-   
- },
- //点击减少购餐数量
- reduce: function (e) {
-   var that = this;
-   var nums = that.data.num;
-   var singlePrice = e.currentTarget.dataset.price;
-   var sums=that.data.sum;
-   var typeList = that.data.typeList;
-   var id = e.currentTarget.dataset.id;
-   
-   typeList.forEach(function(val,key){
-     if (val.dish_id == id) {
-       if (nums == 0) {
-         that.setData({
-           num: 0,
-         })
-       }
-       else {
-         if (sums <= 0) {
-           that.setData({
-             sum: 0,
-           })
-         } else {
-           that.setData({
-             num: nums - 1,
-             sum: (sums - singlePrice).toFixed(2),
-             id: id
-           })
-         }
-
-       }
-     }
-   })
-   
-   
- },
+  add: function (e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    var typeList = that.data.typeList;
+    let num = typeList[index].flag;
+    let total= typeList[index].total;
+    var arrInfo=that.data.arrInfo;
+    var allPrice=that.data.allPrice;
+    num = num + 1;
+    typeList[index].flag = num;
+    typeList[index].total = num * typeList[index].price;
+    arrInfo.push(typeList[index]);
+    that.setData({
+      typeList: typeList,
+      arrInfo: arrInfo,
+      allPrice:allPrice
+    });
+    that.getTotalPrice();
+    wx.setStorage({
+      key: 'typeList',
+      data:  { typeList: that.data.typeList, price: typeList[index].total },
+    })   
+    //console.log(that.data.typeList);
+  },
+  //点击减少购餐数量
+  reduce: function (e) {
+    var that = this;
+    var typeList = that.data.typeList;
+    var index = e.currentTarget.dataset.index;
+    let num = typeList[index].flag;
+    let discount = typeList[index].discount;
+    if (num <= 0) {
+      return false;
+    }
+    num = num - 1;
+    typeList[index].flag = num;
+    typeList[index].total = typeList[index].total - typeList[index].price;
+    
+    that.setData({
+      typeList: typeList,
+    });
+    that.getTotalPrice();
+    wx.setStorage({
+      key: 'typeList',
+      data: { typeList: that.data.typeList, price: typeList[index].total},
+    })   
+  },
  //点击购物车显示具体购物信息
  bindImg:function(){
    var that = this;
@@ -97,9 +101,7 @@ Page({
        flag:true,
        shadeShow: ''
      })
-   }
-    
-    
+   }  
  },
 //  点击美食分类改变背景色
 changeColor:function(e){
@@ -130,7 +132,7 @@ changeColor:function(e){
  
 },
 //点击结算按钮
-account:function(){
+account:function(e){
   wx.navigateTo({
     url: '/pages/order/addOrder/index',
   })
@@ -154,12 +156,6 @@ hidCart:function(){
     })
   }
 },
-// //点击显示详情
-// showDetail:function(){
-//   wx.navigateTo({
-//     url: '/pages/order/orderDetail/index',
-//   })
-// },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -187,23 +183,17 @@ hidCart:function(){
           id:id,
       },
       success: function (res) {
-        console.log("请求接口11111");
-        console.log(res.data);
            that.setData({
              categoryList: res.data,
              name: res.data[0].category_name,
         });  
-        res.data.forEach(function(val,key){
-          if(val.child){
-            //console.log(val.child);
             that.setData({
-              typeList: val.child
+              typeList: res.data[0].child
             })
-          }   
-        })
         
       },
     })
+    
   },
 
   /**
@@ -217,7 +207,7 @@ hidCart:function(){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**

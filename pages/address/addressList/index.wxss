@@ -9,8 +9,11 @@ page{background: #efefef;}
 .addAddress .line .time{color:#228bf4}
 /* 地址列表 */
 .list{background: #fff;width:91.9%;padding:0 4%;font-size:28rpx;color:#333;border-top:1px solid #dadada;border-bottom:1px solid #dadada;}
-.list .address{padding:15rpx 0;position: relative;border-bottom:1px solid #dadada;}
+.list .address{padding:15rpx 0rpx;position: relative;border-bottom:1px solid #dadada;padding-left:9%;}
+.list .address icon{position: absolute;top:29rpx;left:0%;}
 .list .address view:first-child{margin-bottom:10rpx;}
 .list .address:last-child{border-bottom:none;}
 .list .address .img{position: absolute;top:34rpx;right:0rpx;}
 .list .address .img image{width:48rpx;height:48rpx;}
+/* 确定按钮 */
+.btn{width:100%;background:#7be22a;padding:25rpx;text-align: center;color:#fff;position: fixed;left:0;bottom: 0;font-size:32rpx;}

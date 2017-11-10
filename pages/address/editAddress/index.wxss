@@ -10,3 +10,5 @@ page{font-size:28rpx;background: #efefef;}
 .info view.card{border-top:1px solid #E8E8E8;}
 /* 确定按钮 */
 .btn{width:100%;background:#7be22a;padding:25rpx;text-align: center;color:#fff;position: fixed;left:0;bottom: 0;font-size:32rpx;}
+#address input{display: block;margin-top:24rpx;}
+.btn-area button{background-color:#7be22a;border-radius: 0;position: fixed;left:0;bottom: 0;color:#fff;width:100%;}
