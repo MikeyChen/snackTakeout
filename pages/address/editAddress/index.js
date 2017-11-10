@@ -10,11 +10,13 @@ Page({
   },
   //点击确定按钮
   formSubmit: function (e) {
+    var that = this;
     var isAddress=that.data.address;
-    
+    //console.log("空地址");
+    //console.log(isAddress);
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
     var editAddress=e.detail.value;
-    var that=this;
+    
     //表单内容为空校验
     if (editAddress.phone.length == 0 || editAddress.name.length == 0 || editAddress.address.length == 0 || editAddress.street.length==0 || editAddress.sex.length==0){
       wx.showModal({
