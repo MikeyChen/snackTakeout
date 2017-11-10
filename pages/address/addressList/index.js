@@ -85,9 +85,10 @@ Page({
         weixin_user_id: weixin_user_id,
       },
       success: function (res) {
+        console.log(res);
         if(res.data.code==0){
-          console.log();
-          if (res.data.data){
+           console.log(res.data.data);
+          if (res.data.data==[]){
             res.data.data[0].isSelected = true;
             that.setData({
               addressList: res.data.data,
@@ -95,8 +96,7 @@ Page({
             })
           }else{
             that.setData({
-              addressList:[],
-              
+              addressList:[], 
             })
           }
           
