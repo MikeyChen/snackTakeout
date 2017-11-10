@@ -1,9 +1,9 @@
 {
   "pages": 
   [
-    
+    "pages/address/addressList/index",
     "pages/index/index",
-   "pages/address/addressList/index",
+   
     "pages/address/editAddress/index",
     "pages/order/index/index",
     "pages/order/orderDetail/index",
@@ -23,7 +23,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#7be22a",
-    "navigationBarTitleText": "云南特色美食V",
+    "navigationBarTitleText": "云南美食之家",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {

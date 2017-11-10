@@ -10,7 +10,9 @@ Page({
    green:"#7be22a",
    isSelected:false,
    id:0,
-   selected:[]
+   selected:[],
+   isShow:'isShow',
+   isHide:'isHide'
   },
   //选择地址
   selected:function(e){
@@ -36,6 +38,7 @@ Page({
   // 新增收货地址
   addAddr:function(e){
     //console.log(obj);
+    var that = this;
     var obj = e.currentTarget.dataset.obj; 
     wx.navigateTo({
       url: '/pages/address/editAddress/index?obj='+'',
@@ -52,8 +55,7 @@ Page({
   },
   // 点击确定按钮
   confirm:function(){
-    //console.log(22222222);
-    var that=this;
+    
     var selected=[];
     var addressList=that.data.addressList;
     addressList.forEach(function(val,key){
@@ -73,36 +75,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this;
-    var weixin_user_id=wx.getStorageSync("weixin_user_id");
-    wx.request({
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      method: 'get',
-      url: app.globalData.webSite + '/weixin.php/wechat/addressGet',
-      data: {
-        weixin_user_id: weixin_user_id,
-      },
-      success: function (res) {
-        console.log(res);
-        if(res.data.code==0){
-           console.log(res.data.data);
-          if (res.data.data==[]){
-            res.data.data[0].isSelected = true;
-            that.setData({
-              addressList: res.data.data,
-              id: res.data.data[0].id,//设置默认地址
-            })
-          }else{
-            that.setData({
-              addressList:[], 
-            })
-          }
-          
-        }
-      },
-    })
+   
   },
 
   /**
@@ -116,7 +89,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this;
+    var weixin_user_id = wx.getStorageSync("weixin_user_id");
+    wx.request({
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'get',
+      url: app.globalData.webSite + '/weixin.php/wechat/addressGet',
+      data: {
+        weixin_user_id: weixin_user_id,
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.data.code == 0) {
+          console.log("地址列表");
+          console.log(res.data.data);
+          if (res.data.date != []) {
+            res.data.data[0].isSelected = true;
+            that.setData({
+              addressList: res.data.data,
+              id: res.data.data[0].id,//设置默认地址
+            })
+          } else {
+            that.setData({
+              addressList: [],
+            })
+          }
+
+        }
+      },
+    })
   },
 
   /**
