@@ -86,12 +86,20 @@ Page({
       },
       success: function (res) {
         if(res.data.code==0){
-          console.log(res.data.data);
-          res.data.data[0].isSelected=true;
+          console.log();
+          if (res.data.data){
+            res.data.data[0].isSelected = true;
             that.setData({
-              addressList:res.data.data,
+              addressList: res.data.data,
               id: res.data.data[0].id,//设置默认地址
             })
+          }else{
+            that.setData({
+              addressList:[],
+              
+            })
+          }
+          
         }
       },
     })

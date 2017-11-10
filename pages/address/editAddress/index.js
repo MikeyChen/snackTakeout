@@ -10,6 +10,8 @@ Page({
   },
   //点击确定按钮
   formSubmit: function (e) {
+    var isAddress=that.data.address;
+    
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
     var editAddress=e.detail.value;
     var that=this;
@@ -24,29 +26,56 @@ Page({
     }
     else{
       //请求接口
-    wx.request({
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      method: 'post',
-      url: app.globalData.webSite + '/weixin.php/wechat/addressadd',
-      data: {
-        phone: editAddress.phone,
-        name: editAddress.name,
-        sex: editAddress.sex,
-        address: editAddress.address,
-        street: editAddress.street,
-        weixin_user_id:wx.getStorageSync("weixin_user_id")
-      },
-     
-      success: function (res) {
-        console.log("scuesss");
-        if (res.data.code == 0) {
-          console.log(res);
-          wx.navigateBack();
-        }
-      },
-    })
+      if (isAddress) {
+        wx.request({
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: 'post',
+          url: app.globalData.webSite + '/weixin.php/wechat/addressadd',
+          data: {
+            phone: editAddress.phone,
+            name: editAddress.name,
+            sex: editAddress.sex,
+            address: editAddress.address,
+            street: editAddress.street,
+            weixin_user_id: wx.getStorageSync("weixin_user_id")
+          },
+
+          success: function (res) {
+            console.log("scuesss");
+            if (res.data.code == 0) {
+              console.log(res);
+              wx.navigateBack();
+            }
+          },
+        })
+      }else{
+        wx.request({
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: 'post',
+          url: app.globalData.webSite + '/weixin.php/wechat/addressadd',
+          data: {
+            phone: editAddress.phone,
+            name: editAddress.name,
+            sex: editAddress.sex,
+            address: editAddress.address,
+            street: editAddress.street,
+            weixin_user_id: wx.getStorageSync("weixin_user_id")
+          },
+
+          success: function (res) {
+            console.log("scuesss");
+            if (res.data.code == 0) {
+              console.log(res);
+              wx.navigateBack();
+            }
+          },
+        })
+      }
+    
     }
   },
   
