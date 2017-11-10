@@ -41,7 +41,7 @@ Page({
             sex: editAddress.sex,
             address: editAddress.address,
             street: editAddress.street,
-            weixin_user_id: wx.getStorageSync("weixin_user_id")
+            //weixin_user_id: wx.getStorageSync("weixin_user_id")
           },
 
           success: function (res) {
@@ -63,7 +63,11 @@ Page({
           url: app.globalData.webSite + '/weixin.php/wechat/addressEdit',
           data: {
             id:isAddress.id,
-            weixin_user_id: wx.getStorageSync("weixin_user_id")
+            phone: editAddress.phone,
+            name: editAddress.name,
+            sex: editAddress.sex,
+            address: editAddress.address,
+            street: editAddress.street,
           },
           success: function (res) {
             console.log("11111144444");
