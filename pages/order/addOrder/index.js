@@ -16,19 +16,25 @@ Page({
     selAddress:'请添加收货地址'
     
   },
-  // // 选择收货地址
-  // choseAddress:function(){
-  //   var hasAddress=this.data.hasAddress;
-  //   wx.navigateTo({
-  //     url: '/pages/address/addressList/index?hasAddress=' + hasAddress,
-  //   })
-  // },
   //提交订单
   submitOrder:function(){
     var that=this;
-    var selAddress=that.data.selAddress;
+    var dishList=[];
+    var selAddress = that.data.selAddress;
+    var typeList=that.data.typeList;
+    console.log(typeList);
+    // typeList.forEach(function(val,key){
+    //   dishList.push(val.store_id);
+    //   dishList.push(val.flag);
+    //   dishList.push(val.dish_id);
+    //   dishList.push(val.category_id);
+    //   dishList.push(val.total);
+    // })
+    console.log(dishList);
+    var isEmpty = selAddress.name + selAddress.address + selAddress.street;
+   
     //判断地址是否为空
-    if (selAddress == "" || selAddress=="请添加收货地址"){
+    if (isEmpty == "" || isEmpty=="请添加收货地址"){
       wx.showModal({
         title: '提示',
         content: '收货地址不能为空',
@@ -43,9 +49,29 @@ Page({
       })
     }else{
       //地址不为空，跳转到订单页面
-     wx.navigateTo({
-      url: '/pages/order/orderList/index',
-    })
+       wx.request({
+       header: {
+           "Content-Type": "application/x-www-form-urlencoded"
+       },
+        method: 'post',
+            data:{
+              address_id: selAddress.id,
+             weixin_user_id: selAddress.weixin_user_id,
+              total:that.data.allPrice,
+              dishData: JSON.stringify(typeList)
+           },
+         url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
+         success: function (res) {
+          console.log("价格");
+          console.log(res);
+         
+
+      // //     //console.log(that.data.shopList);
+        },
+       })
+    //  wx.navigateTo({
+    //   url: '/pages/order/orderList/index',
+    // })
     }
     
   },
@@ -59,6 +85,8 @@ Page({
     wx.getStorage({
       key: 'typeList',
       success: function(res) {
+        //console.log("订单");
+        //console.log(res);
         res.data.typeList.forEach(function(val,key){
           console.log(val.flag);
             if(val.flag!=0){
@@ -69,10 +97,18 @@ Page({
           typeList:arr,
           price: res.data.price
         })
-
+      console.log("price");
+      console.log(that.data.price);
       },
     })
-    
+    wx.getStorage({
+      key: 'price',
+      success: function(res) {
+        that.setData({
+          allPrice:res.data
+        })
+      },
+    })
     
     //送餐到达时间
     var hour = myDate.getHours();
@@ -118,10 +154,11 @@ Page({
     wx.getStorage({
       key: 'selected',
       success: function (res) {
-        //console.log("地址");
-        var addr = res.data.name + res.data.address + res.data.street;
+        // console.log("地址");
+         console.log(res.data);
+        //var addr = res.data.name + res.data.address + res.data.street;
         that.setData({
-          selAddress: addr
+          selAddress: res.data
         })
       },
     })

@@ -35,6 +35,10 @@ Page({
       totalPrice: total.toFixed(2),
       allNum: numbers
     });
+    wx.setStorage({
+      key: 'price',
+      data: total,
+    })
   },
   //点击添加购餐数量
   add: function (e) {

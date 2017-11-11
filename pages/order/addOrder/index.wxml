@@ -4,7 +4,7 @@
    <navigator url='/pages/address/addressList/index'>
    <view class='box'>
       <image src='/imgs/add_icon.png'></image>
-      <text class='word'>{{selAddress}}</text>
+      <text class='word'>{{selAddress.name}}{{selAddress.address}}{{selAddress.street}}</text>
       <text class='arrow'>></text>
        <!-- bindtap='choseAddress' -->
    </view>
@@ -43,6 +43,6 @@
 </view>
 <!-- 提交订单 -->
 <view class="submitOrder">
-   <view class='sumPrice'>合计<text>￥{{price}}</text></view>
+   <view class='sumPrice'>合计<text>￥{{allPrice}}</text></view>
    <view class='order' bindtap='submitOrder'>提交订单</view>
 </view>
