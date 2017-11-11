@@ -130,6 +130,8 @@ Page({
       method: 'get',
       url: app.globalData.webSite + '/weixin.php/wechat/getstore',
       success: function (res) {
+        
+        //console.log(res);
         that.setData({
           shopList: res.data
         })

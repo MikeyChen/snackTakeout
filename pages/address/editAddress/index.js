@@ -41,13 +41,14 @@ Page({
             sex: editAddress.sex,
             address: editAddress.address,
             street: editAddress.street,
-            //weixin_user_id: wx.getStorageSync("weixin_user_id")
+            weixin_user_id: wx.getStorageSync("weixin_user_id")
           },
 
           success: function (res) {
             console.log("scuesss");
+            console.log(res);
             if (res.data.code == 0) {
-              //console.log(res);
+              console.log("code");
               wx.navigateBack();
             }
           },
@@ -68,6 +69,7 @@ Page({
             sex: editAddress.sex,
             address: editAddress.address,
             street: editAddress.street,
+            weixin_user_id: wx.getStorageSync("weixin_user_id")
           },
           success: function (res) {
             console.log("11111144444");
@@ -75,10 +77,10 @@ Page({
             if (res.data.code == 0) {
               console.log("121212121212121");
               //console.log(res);
+              //wx.navigateBack();
               wx.navigateTo({
                 url: '/pages/address/addressList/index',
                 fail:function(res){
-                  console.log("cccvv");
                   console.log(res);
                 }
               })

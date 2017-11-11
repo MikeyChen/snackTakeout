@@ -17,7 +17,7 @@ page{background: #efefef;font-size:28rpx;}
 .list .address .del{right:70rpx;}
 .list .address .img image{width:48rpx;height:48rpx;}
 /* 确定按钮 */
-.btn{width:100%;background:#7be22a;padding:25rpx;text-align: center;color:#fff;position: absolute;left:0;bottom: 0;font-size:32rpx;z-index: 50;}
+.btn{width:100%;background:#7be22a;padding:25rpx;text-align: center;color:#fff;position: absolute;left:0;bottom: 0;font-size:32rpx;}
 
 
 
@@ -36,4 +36,4 @@ form{width:100%;}
 /* 确定按钮 */
 .btn{width:100%;background:#7be22a;padding:25rpx;text-align: center;color:#fff;position: fixed;left:0;bottom: 0;font-size:32rpx;}
 #address input{display: block;margin-top:24rpx;}
-.btn-area button{background-color:#7be22a;border-radius: 0;position: fixed;left:0;bottom: 0;color:#fff;width:100%;z-index: 20;}
+.btn-area button{background-color:#7be22a;border-radius: 0;position: fixed;left:0;bottom: 0;color:#fff;width:100%;}

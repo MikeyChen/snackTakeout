@@ -21,6 +21,10 @@ App({
           method: "POST",
           success: function (res) {
             if (res.data.code == 0) {
+              // wx.setStorage({
+              //   key: 'weixin_user_id',
+              //   data: res.data.weixin_user_id,
+              // })
               wx.setStorageSync("weixin_user_id", res.data.weixin_user_id);
             }
           }

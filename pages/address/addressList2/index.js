@@ -13,89 +13,8 @@ Page({
    selected:[],
    isShow:'isShow',
    isHide:'isHide',
-   addressList:[],
-   zIndexOne:"60",
-   zIndexTwo:'50',
-   none: "block",
-   hid:"none"
+   addressList:[]
   },
-  //点击确定按钮
-  formSubmit: function (e) {
-    var that = this;
-    var isAddress = that.data.address;
-    var editAddress = e.detail.value;
-    //表单内容为空校验
-    if (editAddress.phone.length == 0 || editAddress.name.length == 0 || editAddress.address.length == 0 || editAddress.street.length == 0 || editAddress.sex.length == 0) {
-      wx.showModal({
-        title: '提示',
-        content: '请确保所有信息已填完整',
-        success: function (res) {
-        }
-      })
-    }
-    else {
-      //请求接口
-      if (isAddress == "empty") {
-        console.log("没数据11111111111");
-        wx.request({
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          method: 'post',
-          url: app.globalData.webSite + '/weixin.php/wechat/addressadd',
-          data: {
-            phone: editAddress.phone,
-            name: editAddress.name,
-            sex: editAddress.sex,
-            address: editAddress.address,
-            street: editAddress.street,
-            weixin_user_id: wx.getStorageSync("weixin_user_id")
-          },
-          success: function (res) {
-            console.log("scuesss");
-            console.log(res);
-              that.setData({
-                isShow: 'isShow',
-                isHide: 'isHide',
-                none: "block",
-                hid: "none"
-              })
-              that.getList();
-          },
-        })
-
-      } else {
-        console.log("有数据222222222");
-        wx.request({
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          method: 'post',
-          url: app.globalData.webSite + '/weixin.php/wechat/addressEdit',
-          data: {
-            id: isAddress.id,
-            phone: editAddress.phone,
-            name: editAddress.name,
-            sex: editAddress.sex,
-            address: editAddress.address,
-            street: editAddress.street,
-            weixin_user_id: wx.getStorageSync("weixin_user_id")
-          },
-          success: function (res) {
-              that.setData({
-                isShow: 'isShow',
-                isHide: 'isHide',
-                none: "block",
-                hid: "none"
-              })     
-             that.getList();  
-          },
-        })
-      }
-
-    }
-  },
-
   //选择地址
   selected:function(e){
     var that=this;
@@ -142,7 +61,41 @@ Page({
               id: id,
             },
             success: function (res) {
-             that.getList();
+              wx.request({
+                header: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                },
+                method: 'get',
+                url: app.globalData.webSite + '/weixin.php/wechat/addressGet',
+                data: {
+                  weixin_user_id: weixin_user_id,
+                },
+                success: function (res) {
+                  console.log("//////////////////");
+                  console.log(res);
+                  if (res.data.code == 0) {
+                    console.log("地址列表");
+                    console.log(res.data.data);
+                    res.data.data.forEach(function (val, key) {
+                      addressList.push(val);
+                    })
+                    if (addressList.length != 0) {
+                      console.log("地址列表不为空");
+                      addressList[0].isSelected = true;
+                      that.setData({
+                        addressList: addressList,
+                        id: addressList[0].id,//设置默认地址
+                      })
+                    } else {
+                      console.log("地址列表为空");
+                      that.setData({
+                        addressList: [],
+                      })
+                    }
+
+                  }
+                },
+              })
 
             },
           })
@@ -159,24 +112,16 @@ Page({
     //console.log(obj);
     var that = this;
     var obj = e.currentTarget.dataset.obj; 
-    that.setData({
-      isShow: 'isHide',
-      isHide: 'isShow',
-      address:"empty",
-      none: "none",
-      hid: "block"
+    wx.navigateTo({
+      url: '/pages/address/editAddress/index?obj='+'',
     })
   },
   //修改地址
   editAddr:function(e){
-    var that=this;
     var obj=e.currentTarget.dataset.obj; 
-      that.setData({
-        isShow: 'isHide',
-        isHide: 'isShow',
-        address: obj,
-        none: "none",
-        hid: "block"
+      var str = JSON.stringify(e.currentTarget.dataset.obj);
+      wx.navigateTo({
+        url: '/pages/address/editAddress/index?obj=' + str,
       })
   },
   // 点击确定按钮
@@ -195,12 +140,12 @@ Page({
     })
     //返回上一层页面
     wx.navigateBack();
+    //console.log(selected);
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  //请求所有接口
-  getList(){
+  onLoad: function (options) {
     var that = this;
     var addressList = [];
     var weixin_user_id = wx.getStorageSync("weixin_user_id");
@@ -218,19 +163,12 @@ Page({
         console.log(res);
         if (res.data.code == 0) {
           console.log("地址列表");
+          console.log(res.data.data);
           res.data.data.forEach(function (val, key) {
-            if(val.sex==1){
-              val.sex="女士";
-            }
-            if (val.sex == 0){
-              val.sex = "先生";
-            }
             addressList.push(val);
-           
           })
           if (addressList.length != 0) {
             console.log("地址列表不为空");
-            console.log(addressList);
             addressList[0].isSelected = true;
             that.setData({
               addressList: addressList,
@@ -246,10 +184,6 @@ Page({
         }
       },
     })
-  },
-  onLoad: function (options) {
-    var that = this;
-    that.getList();
   },
 
   /**
