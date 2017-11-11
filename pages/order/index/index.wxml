@@ -70,5 +70,5 @@
       <text class='red'>{{allNum}}</text>
     </view>
     <view class='l'>￥{{totalPrice}}</view>
-    <view class="r {{allNum>0?'noOpcatity':''}}" bindtap="account" data-all="{{totalPrice}}">去结算</view>
+    <button class="{{allNum>0?'noOpcatity':''}}"  bindtap="account" data-all="{{totalPrice}}" disabled="{{allNum>0?'':'kk'}}">去结算</button>
 </view>

@@ -65,6 +65,7 @@ to {
 .cart .imgBox{position: absolute;top:-30rpx;left:3%;}
 .cart .red{width:40rpx;height:40rpx;background: red;border-radius: 50%;color:#fff;display: flex;justify-content: center;text-align: center;position: absolute;top:-12rpx;left:60%;}
 .cart view.l{color:#fff;margin-left:19%;}
-.cart view.r{color:#fff;position: absolute;right:0;top:0;padding:25rpx 0rpx;width:230rpx;text-align: center;background: #7be22a;opacity: 0.3;}
+/* //.cart button{background: none;line-height: 0;padding:25rpx 0rpx;} */
+.cart button{color:#fff;position: absolute;right:0;top:0;width:230rpx;background: #7be22a;opacity: 0.3;border-radius: 0rpx;font-size:28rpx;line-height: 3.55555556;}
 .cart image{width:74rpx; height:74rpx;}
-.cart view.noOpcatity{opacity: 1;}
+.cart button.noOpcatity{opacity: 1;}
