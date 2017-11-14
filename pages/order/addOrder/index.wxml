@@ -4,7 +4,7 @@
    <navigator url='/pages/address/addressList/index'>
    <view class='box'>
       <image src='/imgs/add_icon.png'></image>
-      <text class='word'>{{selAddress.name}}{{selAddress.address}}{{selAddress.street}}</text>
+      <text class='word'>{{addr}}</text>
       <text class='arrow'>></text>
        <!-- bindtap='choseAddress' -->
    </view>

@@ -13,26 +13,18 @@ Page({
   data: {
     webSite: app.globalData.webSite, 
     hasAddress:false,
-    selAddress:'请添加收货地址'
+    addr:'请添加收货地址'
     
   },
   //提交订单
-  submitOrder:function(){
+  submitOrder:function(e){
     var that=this;
-    var dishList=[];
     var selAddress = that.data.selAddress;
     var typeList=that.data.typeList;
-    console.log(typeList);
-    // typeList.forEach(function(val,key){
-    //   dishList.push(val.store_id);
-    //   dishList.push(val.flag);
-    //   dishList.push(val.dish_id);
-    //   dishList.push(val.category_id);
-    //   dishList.push(val.total);
-    // })
-    console.log(dishList);
-    var isEmpty = selAddress.name + selAddress.address + selAddress.street;
-   
+    //console.log("id");
+    //console.log(typeList[0].store_id);
+    //console.log(typeList);
+    var isEmpty = that.data.addr;
     //判断地址是否为空
     if (isEmpty == "" || isEmpty=="请添加收货地址"){
       wx.showModal({
@@ -56,22 +48,23 @@ Page({
         method: 'post',
             data:{
               address_id: selAddress.id,
-             weixin_user_id: selAddress.weixin_user_id,
+              weixin_user_id: selAddress.weixin_user_id,
               total:that.data.allPrice,
-              dishData: JSON.stringify(typeList)
+              dishData: JSON.stringify(typeList),
+              store_id: typeList[0].store_id
            },
          url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
          success: function (res) {
           console.log("价格");
           console.log(res);
-         
+          wx.navigateTo({
+          url: '/pages/order/orderList/index',
+           })
 
-      // //     //console.log(that.data.shopList);
+   //console.log(that.data.shopList);
         },
        })
-    //  wx.navigateTo({
-    //   url: '/pages/order/orderList/index',
-    // })
+    
     }
     
   },
@@ -158,7 +151,8 @@ Page({
          console.log(res.data);
         //var addr = res.data.name + res.data.address + res.data.street;
         that.setData({
-          selAddress: res.data
+          selAddress: res.data,
+          addr: res.data.name + res.data.address + res.data.street
         })
       },
     })
