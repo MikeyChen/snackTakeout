@@ -41,30 +41,31 @@ Page({
       })
     }else{
       //地址不为空，跳转到订单页面
-       wx.request({
-       header: {
-           "Content-Type": "application/x-www-form-urlencoded"
-       },
+      wx.request({
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
         method: 'post',
-            data:{
-              address_id: selAddress.id,
-              weixin_user_id: selAddress.weixin_user_id,
-              total:that.data.allPrice,
-              dishData: JSON.stringify(typeList),
-              store_id: typeList[0].store_id
-           },
-         url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
-         success: function (res) {
+        data: {
+          address_id: selAddress.id,
+          weixin_user_id: selAddress.weixin_user_id,
+          total: that.data.allPrice,
+          dishData: JSON.stringify(typeList),
+          store_id: typeList[0].store_id
+        },
+        url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
+        success: function (res) {
           console.log("价格");
           console.log(res);
+          //var str = JSON.stringify(res.data);
           wx.navigateTo({
-          url: '/pages/order/orderList/index',
-           })
-
-   //console.log(that.data.shopList);
+            url: '/pages/order/orderList/index',
+          })
+          //console.log(that.data.shopList);
         },
-       })
-    
+
+      })
+       
     }
     
   },

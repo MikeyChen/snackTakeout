@@ -20,12 +20,12 @@ Page({
     //   result: options.result
     // });
     wx.getStorage({
-      key: 'orderList',
+      key: 'price',
       success: function (res) {
         that.setData({
-          price: res.data.price
+          allPrice: res.data
         })
-      }
+      },
     })
   },
   clickChecked: function () {

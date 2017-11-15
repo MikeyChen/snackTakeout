@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    var that = this;
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -51,7 +52,33 @@ App({
         }
       }
     })
+
+
+    //随机数生成方法
+    var randomString = function () {
+      var randomNum = '';
+      var randomNumArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+      for (var i = 0; i < 32; i++) {
+        randomNum += randomNumArr[parseInt(Math.random() * 32)];
+      }
+      return randomNum;
+    }
+    that.globalData.randomString = randomString;
+    //商户订单号生成方法
+    var outTradeNo = function () {
+      var randomNum = '';
+      var randomNumArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8'
+        , '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+      for (var i = 0; i < 10; i++) {
+        randomNum += randomNumArr[parseInt(Math.random() * 32)];
+      }
+      var timestamp = Date.parse(new Date());
+      randomNum += timestamp;
+      return randomNum;
+    }
+    that.globalData.outTradeNo = outTradeNo;
   },
+  
   globalData: {
     appid: 'wx203e1116b8467c61',
     userInfo: null,

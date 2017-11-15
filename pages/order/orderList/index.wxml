@@ -3,40 +3,32 @@
 <view class='orderType'>
     <text class="{{active==0?'on':''}}" data-active="0" bindtap="orderNavClick">全 部</text>
     <text class="{{active==1?'on':''}}" data-active="1" bindtap="orderNavClick">待付款</text>
-    <text class="{{active==2?'on':''}}" data-active="2" bindtap="orderNavClick">待使用</text>
-    <text class="{{active==3?'on':''}}" data-active="3" bindtap="orderNavClick">退款中</text>
-    <text class="{{active==4?'on':''}}" data-active="4" bindtap="orderNavClick">已完成</text>
+    <text class="{{active==2?'on':''}}" data-active="2" bindtap="orderNavClick">退款中</text>
+     <text class="{{active==3?'on':''}}" data-active="3" bindtap="orderNavClick">付款完成</text> 
     <view class="{{animation}}"></view> 
 </view>
 <!-- 订单列表 -->
 <view class='orderList'>
+   <block wx:for="{{orderList}}" wx:key="" wx:for-item="order"> 
+  
     <view class='order'>
-        <view class='img'>
-            <image src='/imgs/food1.jpg'></image>
-        </view>
         <view class='orderInfo'>
-            <view class='name'>青和小锅米线<text>待付款</text></view>
-            <view class='time'>下单时间 : 2107-10-12  11:30</view>
-            <view class='price'>￥73</view>
+            <view class='name'>{{order.dishData[0].store_name}}<text>{{order.status}}</text></view>
+            <view class='time'>下单时间 : {{order.date}}</view>
         </view>
+         <view class='img'>
+          <block wx:for="{{order.dishData}}" wx:key="" wx:for-item="order1">
+            <image src='{{webSite}}{{order1.img}}'></image>
+            <view class='price'>{{order1.dish_name}}</view> 
+            <view class='price red'>x{{order1.flag}}</view>
+            <view class='price total red'>￥{{order1.total}}</view> 
+          </block>  
+        </view>
+        
         <view class='btns'>
-            <view class='again' bindtap='again'>在来一单</view>
-            <view bindtap='pay'>立即付款</view>
+            <view class='again' bindtap='again' hidden='{{isHid}}'>再来一单</view>
+            <view bindtap='pay' hidden='{{isShow}}'>立即付款</view>
         </view>
     </view><!--order结束-->
-    <view class='order'>
-        <view class='img'>
-            <image src='/imgs/food1.jpg'></image>
-        </view>
-        <view class='orderInfo'>
-            <view class='name'>青和小锅米线<text>待付款</text></view>
-            <view class='time'>下单时间 : 2107-10-12  11:30</view>
-            <view class='price'>￥73</view>
-        </view>
-        <view class='btns'>
-            <view class='again'>在来一单</view>
-            <view>立即付款</view>
-        </view>
-    </view><!--order结束-->
-    
+    </block>   
 </view><!--orderList-->

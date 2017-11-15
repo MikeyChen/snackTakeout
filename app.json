@@ -1,7 +1,7 @@
 {
   "pages": 
   [
-   
+   "pages/order/orderList/index",
     "pages/index/index",
     "pages/order/index/index",
    "pages/address/addressList2/index",
@@ -11,7 +11,7 @@
     "pages/order/orderDetail/index",
     "pages/order/orderPay/index",
     "pages/order/addOrder/index",
-  "pages/order/orderList/index",
+ 
     
    
     
