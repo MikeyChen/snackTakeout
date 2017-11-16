@@ -59,9 +59,9 @@ Page({
             data: res.data.sdkData,
           })
           //var str = JSON.stringify(res.data);
-          // wx.navigateTo({
-          //   url: '/pages/order/orderList/index',
-          // })
+          wx.navigateTo({
+            url: '/pages/order/orderList/index',
+          })
          
         },
 
