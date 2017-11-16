@@ -7,8 +7,6 @@ Page({
    */
   data: {
     //购餐数量
-    toView: '',
-    scrollTop: '0',
     num:0,
     price:15.58,
     sum:0, 
@@ -27,7 +25,6 @@ Page({
     allNumber:0,
     allPrices:0
   },
-  
   //计算总价，总数
   getTotalPrice() {
     let total = 0;
@@ -69,14 +66,31 @@ Page({
         }
       })
     })
+
+
+  
+ 
+ 
+  
+ 
+ 
+   
+    // let total= foodList[index].total;
+    // var arrInfo=that.data.arrInfo;
+    // var allPrice=that.data.allPrice;
+    // foodList[index].total = num * foodList[index].price;
+    // arrInfo.push(foodList[index]);
     that.setData({
       foodList: foodList,
+      //arrInfo: arrInfo,
+      //allPrice:allPrice
     });
      that.getTotalPrice();
-    wx.setStorage({
-      key: 'typeList',
-      data:  { typeList: that.data.foodList },
-    })   
+    // wx.setStorage({
+    //   key: 'typeList',
+    //   data:  { typeList: that.data.foodList, price: foodList[index].total },
+    // })   
+    //console.log(that.data.typeList);
   },
   //点击减少购餐数量
   reduce: function (e) {
@@ -84,7 +98,10 @@ Page({
     var foodList = that.data.foodList;
     var allDish = that.data.allDish;//所有菜品
     var id = e.currentTarget.dataset.id;
+   
     var index = e.currentTarget.dataset.index;
+    //let num = typeList[index].flag;
+    //let discount = typeList[index].discount;
     foodList.forEach(function (val, key) {
       val.child.forEach(function (val1, key1) {
         if (val1.dish_id == id) {
@@ -98,15 +115,23 @@ Page({
           val.child[key1].total = val.child[key1].total- val.child[key1].price;
         }
       })
-    }) 
+    })
+
+    // if (num <= 0) {
+    //   return false;
+    // }
+    // num = num - 1;
+    // typeList[index].flag = num;
+    // typeList[index].total = typeList[index].total - typeList[index].price;
+    
     that.setData({
       foodList: foodList,
     });
     that.getTotalPrice();
-    wx.setStorage({
-      key: 'typeList',
-      data: { typeList: that.data.foodList},
-     })   
+    // wx.setStorage({
+    //   key: 'typeList',
+    //   data: { typeList: that.data.foodList, price: typeList[index].total},
+    // })   
   },
  //点击购物车显示具体购物信息
  bindImg:function(){
@@ -129,35 +154,11 @@ Page({
  },
 //  点击美食分类改变背景色
 changeColor:function(e){
-
-  //  click: function (e) {
-  //    var that = this;
-  //    var index = e.currentTarget.dataset.index;
-  //    that.data.letter.forEach(function (val, key) {
-  //      if (index == val) {
-  //        that.setData({
-  //          toView: index
-  //        })
-  //      }
-  //    })
-  //  }
- 
-
-
-
   var that=this;
-  var foodList=that.data.foodList;
-  var id = e.currentTarget.dataset.id;
-  console.log(foodList);
-  foodList.forEach(function(val,key){
-      if(val.id==id){
-        that.setData({
-          toView: foodList[key].id
-        })
-      }
-  })
   var num=e.currentTarget.dataset.num;
+  var id = e.currentTarget.dataset.id;
   var name = e.currentTarget.dataset.name;
+  var categoryList = that.data.categoryList;
   //console.log(num);
   that.setData({
     colorNum: num,

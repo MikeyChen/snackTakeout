@@ -11,7 +11,8 @@ Page({
     animation: 'animation0',
     webSite: app.globalData.webSite,
     isHid:false,
-    isShow:false
+    isShow:false,
+    empty:'empty_box'
   },
   //点击订单类型
   orderNavClick:function(e){
@@ -42,10 +43,21 @@ Page({
       success: function (res) {
         var data = res.data;
         console.log("订单列表");
-        console.log(data.data);
+        //console.log(data);
         // 0 未付钱 1 已经付钱 
         //2 退款
         if (data.code == 0) {
+         
+          if(data.data.length==0){
+            that.setData({
+              empty: 'empty_box1'
+            })
+          }
+          if (data.data.length != 0) {
+            that.setData({
+              empty: 'empty_box'
+            })
+          }
           //orderList.push(data.data);
           data.data.forEach(function (val, key) {
             orderList.push(val)
@@ -71,18 +83,19 @@ Page({
               })
             }
           })
-         
-
+          
         } else {
-          data.data=[]
+          console.log("武术家");
+          data.data=[];
+          
         }
         that.setData({
-          orderList: orderList
+          orderList: orderList, 
         })
       },
-
+  
     })
-
+    console.log(that.data.empty);
   },
   //支付
   pay:function(){
@@ -118,6 +131,16 @@ Page({
        // 0 未付钱 1 已经付钱 
         //2 退款
         if(data.code == 0){
+          if (data.data.length == 0) {
+            that.setData({
+              empty: 'empty_box1'
+            })
+          }
+          if (data.data.length != 0) {
+            that.setData({
+              empty: 'empty_box'
+            })
+          }
           //orderList.push(data.data);
           data.data.forEach(function(val,key){
             orderList.push(val)
@@ -143,16 +166,31 @@ Page({
               })
             }
           })
-         
+          
           
         }else{
          data.data=[];
+         that.setData({
+           empty: 'empty_box1'
+         })
+         
         }
         that.setData({
-          orderList: orderList
+          orderList: orderList,
+          
         })
       },
      
+    })
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res);
+        var height = res.windowHeight / 2;
+        console.log(height);
+        that.setData({
+          height: height
+        });
+      },
     })
    
   },

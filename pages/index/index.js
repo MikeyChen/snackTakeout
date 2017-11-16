@@ -28,9 +28,9 @@ Page({
   jump: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id;
-    //console.log(id);
+    var img = e.currentTarget.dataset.img;
     wx.navigateTo({
-      url: '/pages/order/index/index?id=' + id,
+      url: '/pages/order/index/index?id=' + id+'&img='+img,
     })
   },
   onLoad: function () {

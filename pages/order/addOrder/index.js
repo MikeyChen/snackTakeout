@@ -21,9 +21,6 @@ Page({
     var that=this;
     var selAddress = that.data.selAddress;
     var typeList=that.data.typeList;
-    //console.log("id");
-    //console.log(typeList[0].store_id);
-    //console.log(typeList);
     var isEmpty = that.data.addr;
     //判断地址是否为空
     if (isEmpty == "" || isEmpty=="请添加收货地址"){
@@ -79,20 +76,21 @@ Page({
     wx.getStorage({
       key: 'typeList',
       success: function(res) {
-        //console.log("订单");
-        //console.log(res);
+        console.log("订单");
+        console.log(res);
         res.data.typeList.forEach(function(val,key){
-          console.log(val.flag);
-            if(val.flag!=0){
-             arr.push(val);
+          console.log("val");
+          val.child.forEach(function(val1,key1){
+            if(val1.flag!=0){
+              arr.push(val.child[key1]);
             }
+          })
+           
         })
         that.setData({
           typeList:arr,
           price: res.data.price
         })
-      console.log("price");
-      console.log(that.data.price);
       },
     })
     wx.getStorage({

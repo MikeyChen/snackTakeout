@@ -14,12 +14,10 @@
 
 <view class='foodList'>
     <view class='foodType'>
-    
     <block wx:for="{{foodList}}" wx:key="" wx:for-item="food"> 
         <view class="pub {{colorNum==index?'bgWhite':''}}" bindtap='changeColor' data-num="{{index}}" data-id="{{food.id}}" data-name="{{food.category_name}}">{{food.category_name}}</view>
         </block>  
     </view><!--foodType-->
-    <scroll-view scroll-y style="height: 100%;width:67.7%;margin-left:32%;" scroll-into-view="{{toView}}">
     <block wx:for="{{foodList}}" wx:key="" wx:for-item="food"> 
     <view class='foodDetail'>
         <view class='type'>{{food.category_name}}</view>
@@ -45,26 +43,23 @@
          
         </view><!--box-->
     </view><!--foodDetail-->
-      </block> 
-    </scroll-view> 
+      </block>  
 </view><!--foodList结束-->
 
 <!-- 点击购物车的提示框 -->
 <view class='cartTip {{show}}' >
 
-    <block wx:for="{{foodList}}" wx:key="">
-    <block  wx:for="{{item.child}}" wx:key="" wx:for-item="dish">
-    <view wx:if="{{dish.flag!=0}}">
+    <block wx:for="{{typeList}}" wx:key="">
+    <view wx:if="{{item.flag!=0}}">
     <view class='foodName'>
-        <text class='l'>{{dish.dish_name}}</text><text class='r price'>￥{{dish.total}}</text>
+        <text class='l'>{{item.dish_name}}</text><text class='r price'>￥{{item.total}}</text>
         <view class='btn'>
-                <text class='reduce' bindtap="reduce"  data-index="{{index}}" data-id="{{dish.dish_id}}">-</text>
-                <text class='num'>{{dish.flag}}</text>
-                <text class='add' bindtap="add"  data-index="{{index}}" data-id="{{dish.dish_id}}">+</text>
+                <text class='reduce' bindtap="reduce"  data-index="{{index}}" >-</text>
+                <text class='num'>{{item.flag}}</text>
+                <text class='add' bindtap="add"  data-index="{{index}}" data-id="{{item.dish_id}}">+</text>
         </view>  
         </view>
     </view>
-    </block>
     </block>
     
     <view><text class='l'>餐盒费</text><text class='r'>￥1</text></view>

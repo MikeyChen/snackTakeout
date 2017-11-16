@@ -20,8 +20,7 @@ to {
 .foodType{height:100%;width:30%;background: #f4f4f4;position: fixed;top:176rpx;left:0;}
 .foodType .pub{background: #f4f4f4;text-align: center;padding:40rpx 0;border-bottom:1px solid #fff;color:#666666;}
 .foodType .bgWhite{background:#fff;border-left:3px solid #f4f4f4;}
-.foodDetail{}
-.scroll-view{width:67.7%;}
+.foodDetail{width:67.7%;margin-left:32%;}
 .foodDetail .type{width:95%;padding:15rpx 2%;color:#636363;border-left:3px solid #7be22a;margin:15rpx 0;}
 .foodDetail .box{margin-left:0rpx;color:#8d8d8d;}
 .foodDetail .box .food image{width:100%;height:124rpx;}
