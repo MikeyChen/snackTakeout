@@ -1,6 +1,7 @@
 <scroll-view scroll-y style="height: 100%;" scroll-into-view="{{toView}}">
     <block wx:key='' wx:for='{{letter}}' wx:for-item='item'>
-      <view id="{{item}}" class="scroll-view-item bc_red">{{item}}</view>
+      <view id="{{item}}" class="scroll-view-item"  style='border:1px solid red;'>{{item}}</view>
     </block>
 </scroll-view>
-<view class='all' data-index='D' bindtap='click'>D</view>
+<!-- <view class='all' data-index='D' bindtap='click'>D</view> -->
+<view class='all' data-index='B' bindtap='click'>B</view>

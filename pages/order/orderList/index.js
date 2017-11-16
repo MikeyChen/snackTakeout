@@ -44,8 +44,8 @@ Page({
         var data = res.data;
         console.log("订单列表");
         //console.log(data);
-        // 0 未付钱 1 已经付钱 
-        //2 退款
+        // 0 待付款 1 配送中 2退款中 3 已完成
+      
         if (data.code == 0) {
          
           if(data.data.length==0){
@@ -70,7 +70,7 @@ Page({
               })
             }
             if (val.status == '1') {
-              orderList[key].status = "付款完成";
+              orderList[key].status = "配送中";
               that.setData({
                 isShow: true
               })
@@ -79,6 +79,12 @@ Page({
               orderList[key].status = "退款中";
               that.setData({
                 isHid: true,
+                isShow: true
+              })
+            }
+            if (val.status == '3') {
+              orderList[key].status = "已完成";
+              that.setData({
                 isShow: true
               })
             }
@@ -123,13 +129,12 @@ Page({
       method: 'GET',
       data: {
         weixin_user_id: wx.getStorageSync("weixin_user_id"),
-        status:3,
+        status:-1,
       },
       url: app.globalData.webSite + 'weixin.php/Wechat/getOrder/weixin_user_id/1',
       success: function (res) {
         var data=res.data;
-       // 0 未付钱 1 已经付钱 
-        //2 退款
+          // 0 待付款 1 配送中 2退款中 3 已完成
         if(data.code == 0){
           if (data.data.length == 0) {
             that.setData({
@@ -153,15 +158,21 @@ Page({
               })
             }
             if (val.status == '1') {
-              orderList[key].status = "付款完成";
+              orderList[key].status = "配送中";
               that.setData({
                 isShow: true
               })
             }
             if (val.status == '2') {
-              orderList[key].status = "退款中";
+              orderList[key].status = "已完成";
               that.setData({
                 isHid: true,
+                isShow: true
+              })
+            }
+            if (val.status == '3') {
+              orderList[key].status = "退款中";
+              that.setData({
                 isShow: true
               })
             }

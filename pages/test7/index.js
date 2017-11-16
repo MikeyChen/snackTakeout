@@ -2,7 +2,7 @@
 Page({
   data: {
     toView: '',
-    scrollTop: '0',
+    scrollTop: 200,
     letter: ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   },
   click: function(e){

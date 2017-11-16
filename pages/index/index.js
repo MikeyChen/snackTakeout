@@ -102,7 +102,7 @@ Page({
             url: 'http://192.168.3.172/weixin.php/wechat/saveUserinfo', //仅为示例，并非真实的接口地址
             data: {
               rawData: res.rawData,
-              openid: wx.getStorageSync('weixin_user_id'),
+              weixin_user_id: wx.getStorageSync('weixin_user_id'),
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded' // 默认值

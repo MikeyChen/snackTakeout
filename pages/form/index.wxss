@@ -1,1 +1,8 @@
+
 /* pages/form/index.wxss */
+.bc_red{background: red;}
+.bc_green{background: green;}
+.bc_yellow{background: yellow;}
+.bc_blue{background: blue;}
+.scroll-view-item{height:200px;}
+.scroll-view-item_H{height:200px;}

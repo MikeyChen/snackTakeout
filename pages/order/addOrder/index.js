@@ -52,13 +52,17 @@ Page({
         },
         url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
         success: function (res) {
-          console.log("价格");
-          console.log(res);
-          //var str = JSON.stringify(res.data);
-          wx.navigateTo({
-            url: '/pages/order/orderList/index',
+         // console.log("价格");
+          //console.log(res.data.sdkData);
+          wx.setStorage({
+            key: 'sdkData',
+            data: res.data.sdkData,
           })
-          //console.log(that.data.shopList);
+          //var str = JSON.stringify(res.data);
+          // wx.navigateTo({
+          //   url: '/pages/order/orderList/index',
+          // })
+         
         },
 
       })

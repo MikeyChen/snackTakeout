@@ -1,6 +1,6 @@
 <!--pages/order/index/index.wxml-->
 <!-- 商家Logo，店铺名称 -->
-<view class='top'>
+<view class='top' >
     <view>
         <image src='{{webSite}}{{logoImg}}'></image>
     </view>
@@ -15,39 +15,51 @@
 <view class='foodList'>
     <view class='foodType'>
     
-    <block wx:for="{{foodList}}" wx:key="" wx:for-item="food"> 
-        <view class="pub {{colorNum==index?'bgWhite':''}}" bindtap='changeColor' data-num="{{index}}" data-id="{{food.id}}" data-name="{{food.category_name}}">{{food.category_name}}</view>
-        </block>  
+    <block wx:for="{{foodList}}" wx:key=""> 
+        <view class="pub {{colorNum==index?'bgWhite':''}}" bindtap='changeColor' data-num="{{index}}" data-id="{{item.id}}" data-name="{{item.category_name}}">{{item.category_name}}</view>
+    </block>  
     </view><!--foodType-->
-    <scroll-view scroll-y style="height: 100%;width:67.7%;margin-left:32%;" scroll-into-view="{{toView}}">
-    <block wx:for="{{foodList}}" wx:key="" wx:for-item="food"> 
-    <view class='foodDetail'>
-        <view class='type'>{{food.category_name}}</view>
-        <view class='box'>
-        <block wx:for="{{food.child}}" wx:key="" wx:for-item="dish">
-            <view class='food'>
-                <view class='img'>
-                    <image src='{{webSite}}{{dish.img}}'></image>
-                </view>
-                
-                 <view class='info' bindtap='shopDetail'>
-                    <view class='name'>{{dish.dish_name}}</view>
-                    <view class='ct'>主菜210g+时蔬+咸菜+米饭咸菜+米饭</view>
-                    <view class='price'>￥{{dish.price}}/份</view>
-                </view>
-                 <view class='btn'>
-                    <!-- <text class='line'></text> -->
-                    <text class='reduce' bindtap="reduce"  data-id="{{dish.dish_id}}" data-index="{{index}}">-</text>
-                    <text class='num'>{{dish.flag}}</text>
-                    <text class='add' bindtap="add"  data-id="{{dish.dish_id}}" data-index="{{index}}">+</text>
-                </view> 
-                  
-            </view><!--food结束-->
-         </block>
-        </view><!--box-->
-    </view><!--foodDetail-->
+   <scroll-view scroll-y="true" style="" scroll-into-view="{{toView}}"> 
+        <block wx:for="{{foodList}}" wx:key="" wx:for-item="food">  
+          <view class='foodDetail scroll-view-item' id="{{food.id}}">
+               <view class='type'>{{food.category_name}}</view>
+                <view class='box'>
+                    <block wx:for="{{food.child}}" wx:key="" wx:for-item="dish">
+                        <view class='food'>
+                            <view class='img'>
+                                <image src='{{webSite}}{{dish.img}}'></image>
+                            </view>
+                            <view class='info' bindtap='shopDetail'>
+                                <view class='name'>{{dish.dish_name}}</view>
+                                <view class='ct'>主菜210g+时蔬+咸菜+米饭咸菜+米饭</view>
+                                <view class='price'>￥{{dish.price}}/份</view>
+                            </view>
+                            <view class='btn'>
+                              <text class='line'></text>
+                              <text class='reduce' bindtap="reduce"  data-id="{{dish.dish_id}}" data-index="{{index}}">-</text>
+                              <text class='num'>{{dish.flag}}</text>
+                              <text class='add' bindtap="add"  data-id="{{dish.dish_id}}" data-index="{{index}}">+</text>
+                            </view>      
+                        </view><!--food结束-->
+                    </block>
+                </view><!--box-->
+          </view><!--foodDetail-->
       </block> 
     </scroll-view> 
+    <!-- <scroll-view scroll-y style="height: 100%;width:100%;" scroll-into-view="cc">
+        <!-- <block wx:key='' wx:for='{{letter}}' wx:for-item='item'> -->
+          <!-- <view id="aa" class="scroll-view-item"  style='background:red;height:100px;'>aa1</view>
+          <view id="bb" class="scroll-view-item"  style='background:green;;height:100px;'>aa2</view>
+          <view id="cc" class="scroll-view-item"  style='background:yellow;height:100px;'>aa3</view>
+           <view id="a" class="scroll-view-item"  style='background:red;height:100px;'>a4</view>
+          <view id="b" class="scroll-view-item"  style='background:green;;height:100px;'>a5</view>
+          <view id="c" class="scroll-view-item"  style='background:yellow;height:100px;'>a6</view>
+           <view id="d" class="scroll-view-item"  style='background:red;height:100px;'>a7</view>
+          <view id="e" class="scroll-view-item"  style='background:green;;height:100px;'>a8</view>
+          <view id="f" class="scroll-view-item"  style='background:yellow;height:100px;'>a9</view> -->
+        <!-- </block> -->
+    <!-- </scroll-view> --> 
+    
 </view><!--foodList结束-->
 
 <!-- 点击购物车的提示框 -->

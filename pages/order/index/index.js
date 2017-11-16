@@ -7,8 +7,8 @@ Page({
    */
   data: {
     //购餐数量
-    toView: '',
-    scrollTop: '0',
+    toView: 'bbb',
+    scrollTop: '',
     num:0,
     price:15.58,
     sum:0, 
@@ -129,36 +129,22 @@ Page({
  },
 //  点击美食分类改变背景色
 changeColor:function(e){
-
-  //  click: function (e) {
-  //    var that = this;
-  //    var index = e.currentTarget.dataset.index;
-  //    that.data.letter.forEach(function (val, key) {
-  //      if (index == val) {
-  //        that.setData({
-  //          toView: index
-  //        })
-  //      }
-  //    })
-  //  }
- 
-
-
-
   var that=this;
   var foodList=that.data.foodList;
   var id = e.currentTarget.dataset.id;
-  console.log(foodList);
+  console.log("999999999");
+  //console.log(id);
   foodList.forEach(function(val,key){
-      if(val.id==id){
+    //console.log(val.id);
+      if(val.id == id){
+        console.log(val.id);
         that.setData({
-          toView: foodList[key].id
+          toView: id
         })
       }
   })
   var num=e.currentTarget.dataset.num;
   var name = e.currentTarget.dataset.name;
-  //console.log(num);
   that.setData({
     colorNum: num,
     name:name
@@ -232,6 +218,8 @@ hidCart:function(){
           console.log("6666666666666");
           console.log(list);
         console.log(list);
+        list[0]['id'] = 'aaa';
+        list[1]['id'] = 'bbb';
          that.setData({
            foodList:list,
            //typeList:typeList

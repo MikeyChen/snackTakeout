@@ -1,11 +1,13 @@
 <!--pages/order/orderList/index.wxml-->
 <!-- 导航栏 -->
 <view class='orderType'>
+<!-- // 0 待付款 1 配送中 2退款中 3 已完成
+        -->
     <text class="{{active==0?'on':''}}" data-active="0" bindtap="orderNavClick">全 部</text>
     <text class="{{active==1?'on':''}}" data-active="1" bindtap="orderNavClick">待付款</text>
     <text class="{{active==2?'on':''}}" data-active="2" bindtap="orderNavClick">配送中</text>
-     <text class="{{active==3?'on':''}}" data-active="3" bindtap="orderNavClick">已完成</text> 
-     <text class="{{active==4?'on':''}}" data-active="4" bindtap="orderNavClick">退款中</text>
+    <text class="{{active==3?'on':''}}" data-active="3" bindtap="orderNavClick">已完成</text> 
+    <text class="{{active==4?'on':''}}" data-active="4" bindtap="orderNavClick">退款中</text>
     <view class="{{animation}}"></view> 
 </view>
 <!-- 订单列表 -->
@@ -27,8 +29,8 @@
          </block>  
         
         <view class='btns'>
-            <view class='again' bindtap='again' hidden='{{isHid}}'>再来一单</view>
-            <view bindtap='pay' hidden='{{isShow}}'>立即付款</view>
+            <view class='again' bindtap='again' >再来一单</view>
+            <view bindtap='pay'>立即付款</view>
         </view>
     </view><!--order结束-->
     </block>   
