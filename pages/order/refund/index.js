@@ -22,22 +22,31 @@ Page({
   //申请退款
   refund: function () {
     var that = this;
-    var refund_reason=that.data.refund_reason;
-    /////////////////////
-    var id=that.data.id;
-    var status = 2;
+    //var refund_reason=that.data.refund_reason;
+ 
+    // wx.getStorage({
+    //   key: 'sdkData',
+    //   success: function (res) {
+    //     console.log("订单参数");
+    //     orderid = res.data.orderId;
+    //     console.log(orderid);
+    //   },
+    // })
+    console.log("申请退款订单编号");
+    console.log(that.data.orderid);
      wx.request({
        header: {
          "Content-Type": "application/x-www-form-urlencoded"
        },
        method: 'POST',
-       url: app.globalData.webSite + '/Home/Wechat/orderStatusUpdate',
+       url: app.globalData.webSite + '/weixin.php/wechat/refound',
        data:{
-         status:status,
-         id:id,
-         refund_reason:refund_reason
+         orderid:that.data.orderid,
+        //  refund_reason:refund_reason
        },
        success:function(res){
+         console.log("申请退款");
+         console.log(res);
        var data=res.data;
          if(data.code == '200'){
            that.setData({
@@ -67,6 +76,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this;
+    that.setData({
+      orderid:options.orderid
+    })
+    //console.log("申请支付订单id");
+   
     var that=this;
     //获取设备信息
     wx.getSystemInfo({

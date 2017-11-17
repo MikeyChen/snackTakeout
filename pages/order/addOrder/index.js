@@ -22,6 +22,7 @@ Page({
     var selAddress = that.data.selAddress;
     var typeList=that.data.typeList;
     var isEmpty = that.data.addr;
+    var orderid;
     //判断地址是否为空
     if (isEmpty == "" || isEmpty=="请添加收货地址"){
       wx.showModal({
@@ -54,6 +55,7 @@ Page({
         success: function (res) {
          console.log("价格");
           console.log(res.data);
+          orderid = res.data.orderid;
           wx.setStorage({
             key: 'sdkData',
             data: {'sdk':res.data.sdkData,orderId:res.data.orderid},
@@ -80,8 +82,19 @@ Page({
                     'signType': signType,
                     'paySign': paySign,
                     'success': function (res) {
-                      console.log("支付成功");
-                      console.log(res);
+                      
+                      wx.request({
+                        header: {
+                          "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        method: 'post',
+                        data: {
+                          //weixin_user_id: wx.getStorageSync("weixin_user_id"),
+                          orderid: orderid,
+                        },
+                        url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
+                      })
+                      
                     },
                     'fail': function (res) {
                       console.log("-----------");
@@ -104,7 +117,7 @@ Page({
                 
               } else {
                 wx.navigateTo({
-                  url: '/pages/order/orderList/index',
+                  url: '/pages/order/orderList/index?orderid='+orderid,
                 })
               }
 

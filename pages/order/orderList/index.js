@@ -115,13 +115,18 @@ Page({
   },
   //支付
   pay:function(e){
+    var that=this;
     var price = e.currentTarget.dataset.price;
     var orderid;
     wx.getStorage({
       key: 'sdkData',
       success: function(res) {
-         //console.log("订单参数");
-         orderid = res.data.orderId;
+         console.log("订单参数");
+         //orderid = res.data.orderId;
+         that.setData({
+           orderid: res.data.orderId
+         })
+         //console.log(orderid);
       },
     })
     wx.request({
@@ -131,10 +136,62 @@ Page({
       method: 'post',
       data: {
         weixin_user_id: wx.getStorageSync("weixin_user_id"),
-        orderid:orderid,
+        orderid:that.data.orderid,
       },
       url: app.globalData.webSite + 'weixin.php/wechat/pay',
       success:function(res){
+        console.log("hhhhhhhhhhhhh");
+        console.log(res);
+        var timestamp = String(res.data.timeStamp);
+        var nonceStr = res.data.sdk.nonceStr;
+        var paySign = res.data.sdk.paySign;
+        var Package = res.data.sdk.package;
+        var signType = 'MD5';
+        wx.requestPayment({
+          'timeStamp': timestamp,
+          'nonceStr': nonceStr,
+          'package': Package,
+          'signType': signType,
+          'paySign': paySign,
+          'success': function (res) {
+            // console.log("支付成功");
+            var orderid;
+            wx.getStorage({
+              key: 'sdkData',
+              success: function (res) {
+                //console.log("订单参数");
+                orderid = res.data.orderId;
+              },
+            })
+            wx.request({
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              method: 'post',
+              data: {
+                //weixin_user_id: wx.getStorageSync("weixin_user_id"),
+                orderid: orderid,
+              },
+              url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
+            })
+            wx.navigateTo({
+              url: '/pages/order/orderList/index',
+            })
+          },
+          'fail': function (res) {
+            console.log("-----------");
+            console.log(res);
+          },
+          complete: function (res) {
+            console.log("++++++++++")
+            console.log(res);
+          }
+        })
+
+
+
+
+
         wx.navigateTo({
       url: '/pages/order/orderPay/index?price=' + price
     })
@@ -152,9 +209,11 @@ Page({
   },
   //
   refund:function(e){
+    var that=this;
     var price = e.currentTarget.dataset.price;
+    var orderid=that.data.orderid;
     wx.navigateTo({
-      url: '/pages/order/refund/index?price='+price
+      url: '/pages/order/refund/index?price='+price+'&orderid='+orderid,
     })
   },
   /**
@@ -162,6 +221,11 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
+    console.log("订单编号");
+    console.log(options.orderid);
+    that.setData({
+      orderid:options.orderid
+    })
     var orderList=[];
     var list=[];
     wx.request({
