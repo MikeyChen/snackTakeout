@@ -20,6 +20,7 @@
     </block>  
     </view><!--foodType-->
    <scroll-view scroll-y="true" style="" scroll-into-view="{{toView}}"> 
+      <view class='food_box'>
         <block wx:for="{{foodList}}" wx:key="" wx:for-item="food">  
           <view class='foodDetail scroll-view-item' id="{{food.id}}">
                <view class='type'>{{food.category_name}}</view>
@@ -35,16 +36,18 @@
                                 <view class='price'>￥{{dish.price}}/份</view>
                             </view>
                             <view class='btn'>
-                              <text class='line'></text>
+                              <!-- <text class='line'></text> -->
                               <text class='reduce' bindtap="reduce"  data-id="{{dish.dish_id}}" data-index="{{index}}">-</text>
                               <text class='num'>{{dish.flag}}</text>
                               <text class='add' bindtap="add"  data-id="{{dish.dish_id}}" data-index="{{index}}">+</text>
                             </view>      
                         </view><!--food结束-->
                     </block>
+                 
                 </view><!--box-->
           </view><!--foodDetail-->
       </block> 
+    </view>
     </scroll-view> 
     <!-- <scroll-view scroll-y style="height: 100%;width:100%;" scroll-into-view="cc">
         <!-- <block wx:key='' wx:for='{{letter}}' wx:for-item='item'> -->

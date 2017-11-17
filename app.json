@@ -3,6 +3,7 @@
   [ 
     
     "pages/index/index",
+    "pages/order/index1/index",
     "pages/form/index",
    "pages/order/orderList/index",
     "pages/order/index/index",

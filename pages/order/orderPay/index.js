@@ -36,13 +36,14 @@ Page({
     });
   },
   switchTab:function(e){
-    console.log("支付");
+    //console.log("支付");
     var that = this;
     if (that.data.checked == true){
       wx.getStorage({
         key: 'sdkData',
         success: function (res) {
-          console.log("微信支付");
+         // console.log("微信支付");
+          console.log("bbbbbbbbbbbb");
           console.log(res.data);
           //微信支付-----------------------------------------------------------------------------
           //微信支付所需参数
@@ -54,7 +55,7 @@ Page({
 
           //发起微信支付----------------------------
           //当前时间戳
-          var timestamp = String(new Date());
+          var timestamp = String(res.data.timeStamp);
           var nonceStr = res.data.nonceStr;
           var paySign  = res.data.paySign;
           var Package  = res.data.package;
@@ -67,8 +68,15 @@ Page({
             'paySign': paySign,
             'success': function (res) {
               console.log("支付成功");
+              console.log(res);
             },
             'fail': function (res) {
+              console.log("-----------");
+              console.log(res);
+            },
+            complete:function(res){
+              console.log("++++++++++")
+              console.log(res);
             }
           })
         }

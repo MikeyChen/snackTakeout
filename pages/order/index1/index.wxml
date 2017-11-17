@@ -1,0 +1,66 @@
+<!--pages/order/index/index.wxml-->
+<!-- 商家Logo，店铺名称 -->
+<view class='top' >
+    <view>
+        <image src='{{webSite}}{{logoImg}}'></image>
+    </view>
+    <view class='shop_info'>
+        <view class='name'>{{store_name}}</view>
+        <view class='tip'>起送￥20  |  配送￥6</view>
+        <view  class='notice'><text class='word'>欢迎光临老三家曲靖在页面加载完毕之后，可以通过下面的方法来初始化该跑马灯插件。2123567899456123111111119999999999999999999</text></view>
+        <!-- <image src='/imgs/tips.gif'></image>： -->
+    </view>
+</view><!--top结束-->
+
+<view class='foodList'>
+    <view class='foodType'>
+    
+    <block wx:for="{{foodList}}" wx:key=""> 
+        <view class="pub {{colorNum==index?'bgWhite':''}}" bindtap='tap' data-num="{{index}}" data-id="{{item.id}}" data-name="{{item.category_name}}">{{item.category_name}}</view>
+    </block>  
+    </view><!--foodType-->
+    <view class='food_box'>
+     <scroll-view scroll-y style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"                  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+          <view id="green" class="scroll-view-item bc_green" style='background:green;height:200px;'> 
+          </view>
+          <view id="red"  class="scroll-view-item bc_red" style='background:red;height:200px;'></view>
+          <view id="yellow" class="scroll-view-item bc_yellow" style='background:yellow;height:200px;'></view>
+          <view id="blue" class="scroll-view-item bc_blue" style='background:blue;height:200px;'></view>
+  </scroll-view> 
+  </view>  
+    
+</view><!--foodList结束-->
+
+<!-- 点击购物车的提示框 -->
+<view class='cartTip {{show}}' >
+
+    <block wx:for="{{foodList}}" wx:key="">
+    <block  wx:for="{{item.child}}" wx:key="" wx:for-item="dish">
+    <view wx:if="{{dish.flag!=0}}">
+    <view class='foodName'>
+        <text class='l'>{{dish.dish_name}}</text><text class='r price'>￥{{dish.total}}</text>
+        <view class='btn'>
+                <text class='reduce' bindtap="reduce"  data-index="{{index}}" data-id="{{dish.dish_id}}">-</text>
+                <text class='num'>{{dish.flag}}</text>
+                <text class='add' bindtap="add"  data-index="{{index}}" data-id="{{dish.dish_id}}">+</text>
+        </view>  
+        </view>
+    </view>
+    </block>
+    </block>
+    
+    <view><text class='l'>餐盒费</text><text class='r'>￥1</text></view>
+    
+</view><!--cartTip-->
+<!-- 遮罩层 -->
+<view class='shade {{shadeShow}}' style='height:{{height}}px;width:{{width}}px' bindtap="hidCart"></view>
+
+<!-- 底部购物车 -->
+<view class='cart'>
+    <view class='imgBox'>
+      <image src='/imgs/shop_logo.png' bindtap="bindImg"></image>
+      <text class='red'>{{allNum}}</text>
+    </view>
+    <view class='l'>￥{{totalPrice}}</view>
+    <button class="{{allNum>0?'noOpcatity':''}}"  bindtap="account" data-all="{{totalPrice}}" disabled="{{allNum>0?'':'kk'}}">去结算</button>
+</view>

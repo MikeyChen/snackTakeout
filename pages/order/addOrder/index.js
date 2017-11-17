@@ -59,9 +59,58 @@ Page({
             data: res.data.sdkData,
           })
           //var str = JSON.stringify(res.data);
-          wx.navigateTo({
-            url: '/pages/order/orderList/index',
+          wx.showModal({
+            title: '提示',
+            content: '立即支付吗',
+            success: function (res) {
+              if (res.confirm) {
+              wx.getStorage({
+                key: 'sdkData',
+                success: function(parm) {
+                  var timestamp = String(parm.data.timeStamp);
+                  var nonceStr = parm.data.nonceStr;
+                  var paySign = parm.data.paySign;
+                  var Package = parm.data.package;
+                  var signType = 'MD5';
+                  wx.requestPayment({
+                    'timeStamp': timestamp,
+                    'nonceStr': nonceStr,
+                    'package': Package,
+                    'signType': signType,
+                    'paySign': paySign,
+                    'success': function (res) {
+                      console.log("支付成功");
+                      console.log(res);
+                    },
+                    'fail': function (res) {
+                      console.log("-----------");
+                      console.log(res);
+                    },
+                    complete: function (res) {
+                      console.log("++++++++++")
+                      console.log(res);
+                    }
+                  })
+                },
+              })
+
+
+
+
+
+
+
+                
+              } else {
+                wx.navigateTo({
+                  url: '/pages/order/orderList/index',
+                })
+              }
+
+            }
           })
+
+         
          
         },
 

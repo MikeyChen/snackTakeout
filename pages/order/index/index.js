@@ -215,11 +215,7 @@ hidCart:function(){
         })
         
         //   list.push(ff);
-          console.log("6666666666666");
-          console.log(list);
         console.log(list);
-        list[0]['id'] = 'aaa';
-        list[1]['id'] = 'bbb';
          that.setData({
            foodList:list,
            //typeList:typeList
