@@ -133,11 +133,14 @@ Page({
         console.log(res);
         res.data.typeList.forEach(function(val,key){
           console.log("val");
-          val.child.forEach(function(val1,key1){
-            if(val1.flag!=0){
-              arr.push(val.child[key1]);
-            }
-          })
+          if(val.child){
+            val.child.forEach(function (val1, key1) {
+              if (val1.flag != 0) {
+                arr.push(val.child[key1]);
+              }
+            })
+          }
+         
            
         })
         that.setData({

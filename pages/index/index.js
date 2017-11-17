@@ -30,7 +30,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     var img = e.currentTarget.dataset.img;
     wx.navigateTo({
-      url: '/pages/order/index/index?id=' + id+'&img='+img,
+      url: '/pages/order/index1/index?id=' + id+'&img='+img,
     })
   },
   onLoad: function () {

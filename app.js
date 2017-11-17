@@ -11,7 +11,7 @@ App({
     wx.login({
       success: res => {
         wx.request({
-          url: 'http://192.168.3.172/weixin.php/wechat/getOPenid', //仅为示例，并非真实的接口地址
+          url: 'http://byu3447150001.my3w.com/weixin.php/wechat/getOPenid', //仅为示例，并非真实的接口地址
           data: {
             errMsg: res.errMsg,
             code: res.code,
@@ -84,6 +84,6 @@ App({
     userInfo: null,
     openId: '',
     loginStatus: false,
-    webSite: 'http://192.168.3.172/'
+    webSite: 'http://byu3447150001.my3w.com/'
   }
 })

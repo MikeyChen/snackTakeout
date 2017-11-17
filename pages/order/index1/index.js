@@ -1,6 +1,6 @@
 // pages/order/index/index.js
 var app = getApp(); 
-var order = ['red', 'yellow', 'blue', 'green', 'red']
+var order = [0, 1, 2, 3, 4]
 Page({
 
   /**
@@ -8,8 +8,10 @@ Page({
    */
   data: {
     //购餐数量
-    toView: 'yellow',
-    scrollTop: 0,
+    toView: 'B',
+    A: 'A',
+    scrollTop: 200,
+    letter: ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     num:0,
     price:15.58,
     sum:0, 
@@ -28,30 +30,39 @@ Page({
     allNumber:0,
     allPrices:0,
   },
-  tap: function (e) {
-    for (var i = 0; i < order.length; ++i) {
-      if (order[i] === this.data.toView) {
-        this.setData({
-          toView: order[i + 1]
+  click: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    console.log(id);
+    that.data.foodList.forEach(function (val, key) {
+      console.log(val.id);
+      if (id== val.id) {
+        that.setData({
+          toView: id
         })
-        break
       }
-    }
+    })
   },
   //计算总价，总数
   getTotalPrice() {
+    var that=this;
     let total = 0;
     let numbers = 0;
-    let foodList = this.data.foodList;  // 获取购物车列表  
+    let foodList = that.data.foodList;  // 获取购物车列表
+    console.log("8888888888");
+    console.log(foodList);  
     foodList.forEach(function(val,key){
-       val.child.forEach(function(val1,key1){
-         if(val.flag!=0){
-           total += val.child[key1].flag * val.child[key1].price;
-           numbers += val.child[key1].flag; 
-         }
-       })
+      if(val.child){
+        val.child.forEach(function (val1, key1) {
+          if (val.flag != 0) {
+            total += val.child[key1].flag * val.child[key1].price;
+            numbers += val.child[key1].flag;
+          }
+        })
+      }
+      
     })            
-    this.setData({                                // 最后赋值到data中渲染到页面
+    that.setData({                                // 最后赋值到data中渲染到页面
       foodList: foodList,
       totalPrice: total.toFixed(2),
       allNum: numbers
@@ -66,23 +77,36 @@ Page({
     var that = this;
     var foodList = that.data.foodList;
     var allDish=that.data.allDish;//所有菜品
-    console.log("999999999");
+   
+   // console.log(foodList);
     var id = e.currentTarget.dataset.id;
    // console.log(id);
+   console.log("添加按钮");
+   console.log(that.data.foodList);
     foodList.forEach(function(val,key){
-      val.child.forEach(function(val1,key1){
-        if (val1.dish_id==id){
-          let num = val.child[key1].flag;
-          num = num + 1;
-          val.child[key1].flag= num;
-          val.child[key1].total = num * val.child[key1].price;
-        }
-      })
+      console.log("点击添加");
+      console.log(val);
+      if(val.child){
+        val.child.forEach(function (val1, key1) {
+          if (val1.dish_id == id) {
+
+            let num = val.child[key1].flag;
+            num = num + 1;
+            val.child[key1].flag = num;
+            val.child[key1].total = num * val.child[key1].price;
+          }
+        })
+      }
+      
+     
     })
+   
     that.setData({
       foodList: foodList,
     });
+   
      that.getTotalPrice();
+     
     wx.setStorage({
       key: 'typeList',
       data:  { typeList: that.data.foodList },
@@ -142,7 +166,6 @@ changeColor:function(e){
   var that=this;
   var foodList=that.data.foodList;
   var id = e.currentTarget.dataset.id;
-  console.log("999999999");
   //console.log(id);
   foodList.forEach(function(val,key){
     //console.log(val.id);
@@ -223,7 +246,9 @@ hidCart:function(){
           typeList.push(val.category_name);
           list.push(val);
         })
-        
+       list.forEach(function (val, key) {
+         list[key]['id'] = 'A' + val.id
+       });
         //   list.push(ff);
         console.log(list);
          that.setData({

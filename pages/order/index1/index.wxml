@@ -1,37 +1,74 @@
-<!--pages/order/index/index.wxml-->
-<!-- 商家Logo，店铺名称 -->
-<view class='top' >
-    <view>
-        <image src='{{webSite}}{{logoImg}}'></image>
+<view class='all'>
+  <view class='header'>
+     <view class='img'>
+         <image src='{{webSite}}{{logoImg}}'></image> 
+        <!-- <image src='/imgs/food1.jpg'></image> -->
     </view>
     <view class='shop_info'>
-        <view class='name'>{{store_name}}</view>
+        <view class='name'>老三家</view>
         <view class='tip'>起送￥20  |  配送￥6</view>
         <view  class='notice'><text class='word'>欢迎光临老三家曲靖在页面加载完毕之后，可以通过下面的方法来初始化该跑马灯插件。2123567899456123111111119999999999999999999</text></view>
         <!-- <image src='/imgs/tips.gif'></image>： -->
     </view>
-</view><!--top结束-->
+  </view>
+  <view style='clear:both;'></view>
+  <view class='main'>
+        <view class='left' >
+          <block wx:for="{{foodList}}" wx:key=""> 
+               <view class="pub {{colorNum==index?'bgWhite':''}}" bindtap='click' data-num="{{index}}" data-id="{{item.id}}" data-name="{{item.category_name}}">{{item.category_name}}
+               </view>
+          </block>
+            <!-- <view style='height:80rpx;' data-index='F' bindtap='click'>
+              <text>F</text>
+            </view>
+            <view style='height:80rpx;' data-index='L' bindtap='click'>
+              <text>L</text>
+            </view> -->
+      </view>
+      <view class='right'>
+            <scroll-view scroll-y style="height: 100%;" scroll-into-view="{{toView}}">
+              <block wx:for="{{foodList}}" wx:key="" wx:for-item="food">  
+              <view class='foodDetail scroll-view-item' id="{{food.id}}">
+               <view class='type'>{{food.category_name}}</view>
+                <view class='box'>
+                    <block wx:for="{{food.child}}" wx:key="" wx:for-item="dish">
+                        <view class='food'>
+                            <view class='img'>
+                                <image src='{{webSite}}{{dish.img}}'></image>
+                            </view>
+                            <view class='info' bindtap='shopDetail'>
+                                <view class='name'>{{dish.dish_name}}</view>
+                                <view class='ct'>主菜210g+时蔬+咸菜+米饭咸菜+米饭</view>
+                                <view class='price'>￥{{dish.price}}/份</view>
+                            </view>
+                            <view class='btn'>
+                              <!-- <text class='line'></text> -->
+                              <text class='reduce' bindtap="reduce"  data-id="{{dish.dish_id}}" data-index="{{index}}">-</text>
+                              <text class='num'>{{dish.flag}}</text>
+                              <text class='add' bindtap="add"  data-id="{{dish.dish_id}}" data-index="{{index}}">+</text>
+                            </view>      
+                        </view><!--food结束-->
+                    </block>
+                 
+                </view><!--box-->
+          </view><!--foodDetail-->
+              </block>
+            </scroll-view>
+      </view>
+  </view>
+  <!-- <view class='bottom'></view> -->
 
-<view class='foodList'>
-    <view class='foodType'>
-    
-    <block wx:for="{{foodList}}" wx:key=""> 
-        <view class="pub {{colorNum==index?'bgWhite':''}}" bindtap='tap' data-num="{{index}}" data-id="{{item.id}}" data-name="{{item.category_name}}">{{item.category_name}}</view>
-    </block>  
-    </view><!--foodType-->
-    <view class='food_box'>
-     <scroll-view scroll-y style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll"                  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-          <view id="green" class="scroll-view-item bc_green" style='background:green;height:200px;'> 
-          </view>
-          <view id="red"  class="scroll-view-item bc_red" style='background:red;height:200px;'></view>
-          <view id="yellow" class="scroll-view-item bc_yellow" style='background:yellow;height:200px;'></view>
-          <view id="blue" class="scroll-view-item bc_blue" style='background:blue;height:200px;'></view>
-  </scroll-view> 
-  </view>  
-    
-</view><!--foodList结束-->
 
-<!-- 点击购物车的提示框 -->
+
+
+
+
+
+
+
+
+
+  <!-- 点击购物车的提示框 -->
 <view class='cartTip {{show}}' >
 
     <block wx:for="{{foodList}}" wx:key="">
@@ -63,4 +100,5 @@
     </view>
     <view class='l'>￥{{totalPrice}}</view>
     <button class="{{allNum>0?'noOpcatity':''}}"  bindtap="account" data-all="{{totalPrice}}" disabled="{{allNum>0?'':'kk'}}">去结算</button>
+</view>
 </view>

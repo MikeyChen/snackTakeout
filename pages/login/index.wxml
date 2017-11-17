@@ -1,0 +1,24 @@
+<!--pages/login/index.wxml-->
+<view class='all'>
+  <view class='header'>
+    
+  </view>
+  <view class='main'>
+    <view class='left' >
+      <view style='height:80rpx;' data-index='A5' bindtap='click'>
+        <text>A5</text>
+      </view>
+      <view style='height:80rpx;' data-index='A6' bindtap='click'>
+        <text>A6</text>
+      </view>
+    </view>
+    <view class='right'>
+      <scroll-view scroll-y style="height: 100%;" scroll-into-view="{{toView}}">
+        <block wx:key='' wx:for='{{letter}}' wx:for-item='item'>
+          <view id="{{item}}" class="scroll-view-item"  style='border:1px solid red;height:300rpx'>{{item}}</view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <view class='bottom'></view>
+</view>

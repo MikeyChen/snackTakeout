@@ -1,13 +1,25 @@
 /* pages/order/index/index.wxss */
 page{height:100%;}
 /* 点部商家信息 */
-.top{display: flex;flex-flow: row;font-size:28rpx;background: #7be22a;color:#fff;padding:0 5%;border-top:2px solid #f5f5f5;position: fixed;left:0;top:0;z-index: 5;}
-.top image{width:160rpx;height:160rpx;border-radius: 50%;position: relative;top:4rpx;}
-.top .shop_info{margin-left:20rpx;}
-.top .shop_info .notice image{width:48rpx;height:48rpx;position: relative;top:-5rpx;}
-.top .shop_info view{margin-top:15rpx}
-.top .shop_info view.notice{width:100%;overflow: hidden; margin-rigth:20rpx;}
-.top .shop_info .word{ white-space: nowrap;animation: animation  10s linear infinite;width:100%;padding:40px;position: relative;top:0;left:0;}
+.all{
+  width: 100%;
+  height: 100%;
+}
+.header{
+  width: 95%;
+  height: 186rpx;
+  font-size:28rpx;
+  margin:2%;
+  background: #7be22a;
+  color:#fff;
+}
+.header .img{float:left;width:25%; }
+.header image{width:160rpx;height:160rpx;border-radius: 50%;position: relative;top:4rpx;}
+.header .shop_info{width:70%;float:left; }
+.header .shop_info .notice image{width:48rpx;height:48rpx;position: relative;top:-5rpx;}
+.header .shop_info view{margin-top:15rpx}
+.header .shop_info view.notice{width:100%;overflow: hidden; margin-rigth:20rpx;}
+.header .shop_info .word{ white-space: nowrap;animation: animation  10s linear infinite;width:100%;padding:40px;position: relative;top:0;left:0;}
  @keyframes animation{
   from {
 	left:0px;
@@ -16,29 +28,56 @@ to {
 	left:-100%;
 }
 } 
-/* 商家菜品 */
-.foodList{width:99.5%;font-size:28rpx;background:#fff;position: absolute;top:175rpx;left:0;}
-.foodType{height:100%;width:30%;background: #f4f4f4;float: left;position: fixed;top:175rpx;left:0;}
-.foodType .pub{background: #f4f4f4;text-align: center;padding:40rpx 0;border-bottom:1px solid #fff;color:#666666;}
-.foodType .bgWhite{background:#fff;border-left:3px solid #f4f4f4;}
-.food_box{border-bottom:50rpx;height: auto; width: 69.5%;overflow: scroll;float:left;margin-left:30%;}
-/* scroll-view{width:70%;float:left;border: 1px solid green;margin-left:30%;} */
-.foodDetail .type{width:95%;padding:15rpx 2%;color:#636363;border-left:3px solid #7be22a;margin:15rpx 0;}
-.foodDetail .box{margin-left:0rpx;color:#8d8d8d;}
-.foodDetail .box .food image{width:100%;height:124rpx;}
-.foodDetail .box .food{display: flex;align-items: center;position: relative;padding:20rpx 0;border-bottom:1px solid #e7e5e6;padding-bottom:78rpx;}
-.foodDetail .box .food:first-child{border-top:1px solid #e7e5e6;}
-.foodDetail .box .food .price{color:#ff4a48;margin-top:15rpx;font-size:32rpx;padding-bottom:15rpx;}
-.foodDetail .box .food .img{width:36%;}
-.foodDetail .box .food .info{width:56%;margin:0 2%;margin-right:4%}
-.foodDetail .box .food .info .name{color:#2f2f2f;font-weight: bold;}
-.foodDetail .box .food .info .ct{font-size:24rpx;margin-top:10rpx;}
-.foodDetail .btn{position: absolute;right:4%;bottom:15rpx;}
-.foodDetail .btn text{display: inline-block;} 
-.foodDetail .btn text.reduce{width:60rpx;height:60rpx;border:1px solid #e4e4e4;border-radius: 50%;display:inline-flex;justify-content: center;align-items: center;}
-.foodDetail .btn text.line{display: block;width:20rpx;height:4rpx;background: #afafaf;}
-.foodDetail .btn text.add{width:60rpx;height:60rpx;border:1px solid #7be22a;border-radius: 50%;display:inline-flex;justify-content: center;align-items: center;color:#fff;background: #7be22a;}
-.foodDetail .btn text.num{margin:0 15rpx;}
+
+/* pages/login/index.wxss */
+
+.main{
+  width: 100%;
+  height: 800rpx;
+}
+.left{
+  width: 30%;
+  height: 100%;
+  background: #f4f4f4;
+  float: left;
+  overflow-y: auto;
+  font-size:28rpx;
+  background:#fff;
+}
+.left .pub{background: #f4f4f4;text-align: center;padding:40rpx 0;border-bottom:1px solid #fff;color:#666666;}
+.left .bgWhite{background:#fff;border-left:3px solid #f4f4f4;}
+.right{
+  width: 70%;
+  height: 100%;
+  float: left;
+  font-size:28rpx;
+}
+.right .type{width:95%;padding:15rpx 2%;color:#636363;border-left:3px solid #7be22a;margin:15rpx 0;}
+.right .box{margin-left:0rpx;color:#8d8d8d;}
+.right .box .food image{width:100%;height:124rpx;}
+.right .box .food{display: flex;align-items: center;position: relative;padding:20rpx 0;border-bottom:1px solid #e7e5e6;padding-bottom:78rpx;}
+.right .box .food:first-child{border-top:1px solid #e7e5e6;}
+.right .box .food .price{color:#ff4a48;margin-top:15rpx;font-size:32rpx;padding-bottom:15rpx;}
+.right .box .food .img{width:36%;}
+.right .box .food .info{width:56%;margin:0 2%;margin-right:4%}
+.right .box .food .info .name{color:#2f2f2f;font-weight: bold;}
+.right .box .food .info .ct{font-size:24rpx;margin-top:10rpx;}
+.right .btn{position: absolute;right:4%;bottom:15rpx;}
+.right .btn text{display: inline-block;} 
+.right .btn text.reduce{width:60rpx;height:60rpx;border:1px solid #e4e4e4;border-radius: 50%;display:inline-flex;justify-content: center;align-items: center;}
+.right .btn text.line{display: block;width:20rpx;height:4rpx;background: #afafaf;}
+.right .btn text.add{width:60rpx;height:60rpx;border:1px solid #7be22a;border-radius: 50%;display:inline-flex;justify-content: center;align-items: center;color:#fff;background: #7be22a;}
+.right .btn text.num{margin:0 15rpx;}
+
+
+
+
+
+
+
+
+
+
 /* 点击购物车的提示框 */
 .cartTip{background: #fff;border:1px solid #dbdbdb;padding:20rpx;font-size:28rpx;position: fixed;bottom:84rpx;left:0;width:94.5%;display: none;z-index: 402;}
 .cartTip view{padding:20rpx 0;position: relative;}
@@ -55,8 +94,6 @@ to {
 /* 遮罩层 */
 .shade{background: #000;position: fixed;top:0;left:0;opacity: 0.4;z-index: 400;display: none;}
 .shadeShow{display: block;}
-
-
 
 
 
