@@ -20,7 +20,7 @@
 <!-- 商家列表 -->
 <view class='shopList'>
 <block wx:for="{{shopList}}" wx:key="" wx:for-item="shop">
-   <view class='shop' bindtap='jump' data-id="{{shop.id}}" data-img="{{shop.img}}">
+   <view class='shop' bindtap='jump' data-id="{{shop.id}}" data-img="{{shop.img}}" data-name="{{shop.store_name}}">
      <view class='l'>
          <image src='/imgs/flower1.png' class='flower'></image>
          <image src='{{webSite}}{{shop.img}}'></image>

@@ -10,9 +10,12 @@ Page({
     percent:"0",
     animation: 'animation0',
     webSite: app.globalData.webSite,
-    isHid:false,
-    isShow:false,
-    empty:'empty_box'
+    block:"block",
+    none:"none",
+    empty:'empty_box',
+    show:"hid",
+    none:"hid",
+    refund:'hid'
   },
   //点击订单类型
   orderNavClick:function(e){
@@ -62,30 +65,37 @@ Page({
           data.data.forEach(function (val, key) {
             orderList.push(val)
           })
+          // 再来一单 show 立即付款 none
           orderList.forEach(function (val, key) {
             if (val.status == '0') {
               orderList[key].status = "待付款";
               that.setData({
-                isHid: true
+                show: "hid",
+                none: 'show',
+                refund:'hid'
               })
             }
             if (val.status == '1') {
               orderList[key].status = "配送中";
               that.setData({
-                isShow: true
+                show: "hid",
+                none: 'hid',
+                refund:'refund'
               })
             }
             if (val.status == '2') {
-              orderList[key].status = "退款中";
+              orderList[key].status = "已完成";
               that.setData({
-                isHid: true,
-                isShow: true
+                show: "show",
+                none: 'hid',
+                refund: 'hid'
               })
             }
             if (val.status == '3') {
-              orderList[key].status = "已完成";
+              orderList[key].status = "退款中";
               that.setData({
-                isShow: true
+                show: "hid",
+                none: 'show'
               })
             }
           })
@@ -104,15 +114,47 @@ Page({
     console.log(that.data.empty);
   },
   //支付
-  pay:function(){
-    wx.navigateTo({
-      url: '/pages/order/orderPay/index',
+  pay:function(e){
+    var price = e.currentTarget.dataset.price;
+    var orderid;
+    wx.getStorage({
+      key: 'sdkData',
+      success: function(res) {
+         //console.log("订单参数");
+         orderid = res.data.orderId;
+      },
     })
+    wx.request({
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'post',
+      data: {
+        weixin_user_id: wx.getStorageSync("weixin_user_id"),
+        orderid:orderid,
+      },
+      url: app.globalData.webSite + 'weixin.php/wechat/pay',
+      success:function(res){
+        wx.navigateTo({
+      url: '/pages/order/orderPay/index?price=' + price
+    })
+      },
+    })
+   
   },
   //点击再来一单按钮
-  again:function(){
+  again:function(e){
+   
+    console.log(price);
     wx.navigateTo({
       url:'/pages/order/index/index'
+    })
+  },
+  //
+  refund:function(e){
+    var price = e.currentTarget.dataset.price;
+    wx.navigateTo({
+      url: '/pages/order/refund/index?price='+price
     })
   },
   /**
@@ -147,33 +189,44 @@ Page({
             })
           }
           //orderList.push(data.data);
+          //list[key]['id'] = 'A' + val.id
           data.data.forEach(function(val,key){
+            data.data[key]['sum']=0;
+            val.dishData.forEach(function(val1,key1){
+              data.data[key]['sum'] += val1.total;
+            })
             orderList.push(val)
           })
           orderList.forEach(function (val, key) {
             if (val.status == '0') {
               orderList[key].status = "待付款";
               that.setData({
-                isHid:true
+                show: "hid",
+                none: 'show',
+                refund: 'hid'
               })
             }
             if (val.status == '1') {
               orderList[key].status = "配送中";
               that.setData({
-                isShow: true
+                show: "hid",
+                none: 'hid',
+                refund: 'refund'
               })
             }
             if (val.status == '2') {
               orderList[key].status = "已完成";
               that.setData({
-                isHid: true,
-                isShow: true
+                show: "show",
+                none: 'hid',
+                refund: 'hid'
               })
             }
             if (val.status == '3') {
               orderList[key].status = "退款中";
               that.setData({
-                isShow: true
+                show: "hid",
+                none: 'show'
               })
             }
           })
@@ -191,7 +244,7 @@ Page({
           
         })
       },
-     
+   
     })
     wx.getSystemInfo({
       success: function (res) {

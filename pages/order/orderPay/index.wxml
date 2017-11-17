@@ -6,7 +6,7 @@
     <view class='main1'>
       <image src='../../../imgs/bg.png'></image>
       <view class='block'>
-        <text>￥{{allPrice}}</text>
+        <text>￥{{sum}}</text>
       </view>
     </view>
     <!--主体第二块-->

@@ -11,7 +11,7 @@ App({
     wx.login({
       success: res => {
         wx.request({
-          url: 'http://byu3447150001.my3w.com/weixin.php/wechat/getOPenid', //仅为示例，并非真实的接口地址
+          url: that.globalData.webSite+'/weixin.php/wechat/getOPenid', //仅为示例，并非真实的接口地址
           data: {
             errMsg: res.errMsg,
             code: res.code,
@@ -52,31 +52,6 @@ App({
         }
       }
     })
-
-
-    //随机数生成方法
-    var randomString = function () {
-      var randomNum = '';
-      var randomNumArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-      for (var i = 0; i < 32; i++) {
-        randomNum += randomNumArr[parseInt(Math.random() * 32)];
-      }
-      return randomNum;
-    }
-    that.globalData.randomString = randomString;
-    //商户订单号生成方法
-    var outTradeNo = function () {
-      var randomNum = '';
-      var randomNumArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8'
-        , '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-      for (var i = 0; i < 10; i++) {
-        randomNum += randomNumArr[parseInt(Math.random() * 32)];
-      }
-      var timestamp = Date.parse(new Date());
-      randomNum += timestamp;
-      return randomNum;
-    }
-    that.globalData.outTradeNo = outTradeNo;
   },
   
   globalData: {
@@ -84,6 +59,6 @@ App({
     userInfo: null,
     openId: '',
     loginStatus: false,
-    webSite: 'http://byu3447150001.my3w.com/'
+    webSite: 'http://192.168.3.172/'
   }
 })

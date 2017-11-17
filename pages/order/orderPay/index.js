@@ -15,18 +15,12 @@ Page({
   onLoad: function (options) {
     var that = this;
     var price;
-
-    // that.setData({
-    //   result: options.result
-    // });
-    wx.getStorage({
-      key: 'price',
-      success: function (res) {
-        that.setData({
-          allPrice: res.data
-        })
-      },
-    })
+    console.log("2017嘉禾");
+   console.log(options.price);
+    that.setData({
+      sum:options.price
+    });
+    
   },
   clickChecked: function () {
     var that = this;
@@ -43,8 +37,7 @@ Page({
         key: 'sdkData',
         success: function (res) {
          // console.log("微信支付");
-          console.log("bbbbbbbbbbbb");
-          console.log(res.data);
+
           //微信支付-----------------------------------------------------------------------------
           //微信支付所需参数
           //var mch_id = '1488832592';  //商户号
@@ -56,9 +49,9 @@ Page({
           //发起微信支付----------------------------
           //当前时间戳
           var timestamp = String(res.data.timeStamp);
-          var nonceStr = res.data.nonceStr;
-          var paySign  = res.data.paySign;
-          var Package  = res.data.package;
+          var nonceStr = res.data.sdk.nonceStr;
+          var paySign  = res.data.sdk.paySign;
+          var Package  = res.data.sdk.package;
           var signType = 'MD5';
           wx.requestPayment({
             'timeStamp': timestamp,
@@ -67,8 +60,29 @@ Page({
             'signType': signType,
             'paySign': paySign,
             'success': function (res) {
-              console.log("支付成功");
-              console.log(res);
+             // console.log("支付成功");
+              var orderid;
+              wx.getStorage({
+                key: 'sdkData',
+                success: function (res) {
+                  //console.log("订单参数");
+                  orderid = res.data.orderId;
+                },
+              })
+             wx.request({
+               header: {
+                 "Content-Type": "application/x-www-form-urlencoded"
+               },
+               method: 'post',
+               data: {
+                 //weixin_user_id: wx.getStorageSync("weixin_user_id"),
+                 orderid: orderid,
+               },
+               url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
+             })
+              wx.navigateTo({
+                url: '/pages/order/orderList/index',
+              })
             },
             'fail': function (res) {
               console.log("-----------");

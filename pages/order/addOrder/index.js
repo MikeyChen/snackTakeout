@@ -52,13 +52,14 @@ Page({
         },
         url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
         success: function (res) {
-         // console.log("价格");
-          //console.log(res.data.sdkData);
+         console.log("价格");
+          console.log(res.data);
           wx.setStorage({
             key: 'sdkData',
-            data: res.data.sdkData,
+            data: {'sdk':res.data.sdkData,orderId:res.data.orderid},
           })
           //var str = JSON.stringify(res.data);
+          
           wx.showModal({
             title: '提示',
             content: '立即支付吗',
@@ -67,10 +68,10 @@ Page({
               wx.getStorage({
                 key: 'sdkData',
                 success: function(parm) {
-                  var timestamp = String(parm.data.timeStamp);
-                  var nonceStr = parm.data.nonceStr;
-                  var paySign = parm.data.paySign;
-                  var Package = parm.data.package;
+                  var timestamp = String(parm.data.sdk.timeStamp);
+                  var nonceStr = parm.data.sdk.nonceStr;
+                  var paySign = parm.data.sdk.paySign;
+                  var Package = parm.data.sdk.package;
                   var signType = 'MD5';
                   wx.requestPayment({
                     'timeStamp': timestamp,

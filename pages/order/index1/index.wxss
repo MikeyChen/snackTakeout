@@ -6,12 +6,13 @@ page{height:100%;}
   height: 100%;
 }
 .header{
-  width: 95%;
+  width: 96%;
   height: 186rpx;
   font-size:28rpx;
-  margin:2%;
+  padding:2%;
   background: #7be22a;
   color:#fff;
+  border-top:4rpx solid #fff;
 }
 .header .img{float:left;width:25%; }
 .header image{width:160rpx;height:160rpx;border-radius: 50%;position: relative;top:4rpx;}
@@ -38,19 +39,20 @@ to {
 .left{
   width: 30%;
   height: 100%;
-  background: #f4f4f4;
+  background: #fff;
   float: left;
   overflow-y: auto;
   font-size:28rpx;
   background:#fff;
 }
-.left .pub{background: #f4f4f4;text-align: center;padding:40rpx 0;border-bottom:1px solid #fff;color:#666666;}
-.left .bgWhite{background:#fff;border-left:3px solid #f4f4f4;}
+.left .pub{background: #fff;text-align: center;padding:40rpx 0;border-bottom:1px solid #fff;color:#666666;}
+.left .bgWhite{background:#f4f4f4;border-left:3px solid #f4f4f4;}
 .right{
-  width: 70%;
+  width: 68%;
   height: 100%;
   float: left;
   font-size:28rpx;
+  margin-left:2%;
 }
 .right .type{width:95%;padding:15rpx 2%;color:#636363;border-left:3px solid #7be22a;margin:15rpx 0;}
 .right .box{margin-left:0rpx;color:#8d8d8d;}

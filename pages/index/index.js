@@ -29,8 +29,9 @@ Page({
     var that = this;
     var id = e.currentTarget.dataset.id;
     var img = e.currentTarget.dataset.img;
+    var name = e.currentTarget.dataset.name;
     wx.navigateTo({
-      url: '/pages/order/index1/index?id=' + id+'&img='+img,
+      url: '/pages/order/index1/index?id=' + id+'&img='+img+'&name='+name,
     })
   },
   onLoad: function () {
@@ -130,7 +131,8 @@ Page({
       method: 'get',
       url: app.globalData.webSite + '/weixin.php/wechat/getstore',
       success: function (res) {
-        
+        console.log("所有店铺");
+        console.log(res);
         //console.log(res);
         that.setData({
           shopList: res.data
