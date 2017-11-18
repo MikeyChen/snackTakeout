@@ -56,7 +56,7 @@ Page({
     let numbers = 0;
     let foodList = that.data.foodList;  // 获取购物车列表
     var fee;//总餐盒费
-    var money=3;//that.data.wrap_fee;//单个餐盒费
+    var money=that.data.wrap_fee;//单个餐盒费
     var sendFee = parseInt(that.data.packing_fee);
     foodList.forEach(function(val,key){
       if(val.child){
