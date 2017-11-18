@@ -22,11 +22,11 @@ page{background: #f5f5f5;}
 .orderList .order .name text{position: absolute;right:4%;top:20rpx;display: block;color:#7be22a;font-weight: bold;}
 .orderList .order .btns{position: relative;}
 .orderList .order .btns view{border:1px solid #7be22a;border-radius: 8rpx;color:#7be22a;text-align: center;padding:8rpx 0;width:20%;position: absolute;right:0;top:0;}
-.orderList .order .btns view:first-child{right:25%;}
-.orderList .order .btns view:last-child{right:50%;}
-.orderList .order .btns .hid{display: none !important;}
-.orderList .order .btns .show{display: block !important; }
-.orderList .order .btns .refund{display: block;right:0 !important; }
+/* .orderList .order .btns view:first-child{right:25%;}
+.orderList .order .btns view:last-child{right:50%;} */
+/* .orderList .order .btns .hid{display: none}
+.orderList .order .btns .show{display: block  }
+.orderList .order .btns .refund{display: block;right:0  } */
 
 
 

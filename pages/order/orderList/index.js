@@ -13,9 +13,9 @@ Page({
     block:"block",
     none:"none",
     empty:'empty_box',
-    show:"hid",
-    none:"hid",
-    refund:'hid'
+    again:"block",
+    pay:'block',
+    refund:'block'
   },
   //点击订单类型
   orderNavClick:function(e){
@@ -63,40 +63,25 @@ Page({
           }
           //orderList.push(data.data);
           data.data.forEach(function (val, key) {
+            data.data[key]['sum'] = 0;
+            val.dishData.forEach(function (val1, key1) {
+              data.data[key]['sum'] += val1.total;
+            })
             orderList.push(val)
           })
           // 再来一单 show 立即付款 none
           orderList.forEach(function (val, key) {
             if (val.status == '0') {
               orderList[key].status = "待付款";
-              that.setData({
-                show: "hid",
-                none: 'show',
-                refund:'hid'
-              })
             }
             if (val.status == '1') {
               orderList[key].status = "配送中";
-              that.setData({
-                show: "hid",
-                none: 'hid',
-                refund:'refund'
-              })
             }
             if (val.status == '2') {
               orderList[key].status = "已完成";
-              that.setData({
-                show: "show",
-                none: 'hid',
-                refund: 'hid'
-              })
             }
             if (val.status == '3') {
               orderList[key].status = "退款中";
-              that.setData({
-                show: "hid",
-                none: 'show'
-              })
             }
           })
           
@@ -116,78 +101,10 @@ Page({
   //支付
   pay:function(e){
     var that=this;
-    var price = e.currentTarget.dataset.price;
+    var price = e.currentTarget.dataset.sum;
     var orderid = e.currentTarget.dataset.orderid;
-    // wx.request({
-    //   header: {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    //   },
-    //   method: 'post',
-    //   data: {
-    //     weixin_user_id: wx.getStorageSync("weixin_user_id"),
-    //     orderid:orderid,
-    //   },
-    //   url: app.globalData.webSite + 'weixin.php/wechat/pay',
-    //   success:function(res){
-    //     console.log("hhhhhhhhhhhhh");
-    //     var obj=res.data;
-    //     console.log(res.data.sdkData);
-    //     var timestamp = String(res.data.timeStamp);
-    //     var nonceStr = res.data.sdkData.nonceStr;
-    //     var paySign = res.data.sdkData.paySign;
-    //     var Package = res.data.sdkData.package;
-    //     var signType = 'MD5';
-    //     var order_id = res.data.orderid;
-    //     wx.requestPayment({
-    //       'timeStamp': timestamp,
-    //       'nonceStr': nonceStr,
-    //       'package': Package,
-    //       'signType': signType,
-    //       'paySign': paySign,
-    //       'success': function (res) {
-    //         // console.log("支付成功");
-    //         wx.request({
-    //           header: {
-    //             "Content-Type": "application/x-www-form-urlencoded"
-    //           },
-    //           method: 'post',
-    //           data: {
-    //             //weixin_user_id: wx.getStorageSync("weixin_user_id"),
-    //             orderid: order_id,
-    //           },
-    //           url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
-    //         })
-    //         wx.navigateTo({
-    //           url: '/pages/order/orderList/index',
-    //         })
-    //       },
-    //       'fail': function (res) {
-    //         console.log("-----------");
-    //         console.log(res);
-    //       },
-    //       complete: function (res) {
-    //         console.log("++++++++++")
-    //         console.log(res);
-    //       }
-    //     })
-
-
-
-
-    //     var objs=JSON.stringify(obj);
-    //     wx.navigateTo({
-    //   url: '/pages/order/orderPay/index?price=' + price,
-    // })
-    //   },
-    // })
-
-
-
-
-
-
-
-    
+    console.log("hdfhdkjfdkfjdk");
+    console.log(price);
     wx.navigateTo({
       url: '/pages/order/orderPay/index?price=' + price + '&orderid=' + orderid,
     })
@@ -196,17 +113,16 @@ Page({
   },
   //点击再来一单按钮
   again:function(e){
-   
-    console.log(price);
-    wx.navigateTo({
-      url:'/pages/order/index/index'
-    })
+   wx.switchTab({
+     url: '/pages/index/index',
+   })
   },
   //
   refund:function(e){
     var that=this;
-    var price = e.currentTarget.dataset.price;
-    var orderid=that.data.orderid;
+    var price = e.currentTarget.dataset.sum;
+    var orderid = e.currentTarget.dataset.orderid;
+    console.log(e);
     wx.navigateTo({
       url: '/pages/order/refund/index?price='+price+'&orderid='+orderid,
     })
@@ -216,11 +132,6 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    console.log("订单编号");
-    console.log(options.orderid);
-    that.setData({
-      orderid:options.orderid
-    })
     var orderList=[];
     var list=[];
     wx.request({
@@ -258,35 +169,17 @@ Page({
           })
           orderList.forEach(function (val, key) {
             if (val.status == '0') {
+              console.log(val.status);
               orderList[key].status = "待付款";
-              that.setData({
-                show: "hid",
-                none: 'show',
-                refund: 'hid'
-              })
             }
             if (val.status == '1') {
               orderList[key].status = "配送中";
-              that.setData({
-                show: "hid",
-                none: 'hid',
-                refund: 'refund'
-              })
             }
             if (val.status == '2') {
               orderList[key].status = "已完成";
-              that.setData({
-                show: "show",
-                none: 'hid',
-                refund: 'hid'
-              })
             }
             if (val.status == '3') {
               orderList[key].status = "退款中";
-              that.setData({
-                show: "hid",
-                none: 'show'
-              })
             }
           })
           
@@ -302,8 +195,6 @@ Page({
           orderList: orderList,
           
         })
-        console.log("订单列表");
-        console.log(that.data.orderList);
       },
    
     })

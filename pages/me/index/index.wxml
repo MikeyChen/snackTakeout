@@ -26,10 +26,10 @@
                   </view> 
         </navigator>   
      </view><!--score结束-->
-      <view class="phone nav" data-url='../phone_update/index' >
+      <!-- <view class="phone nav" >
           <navigator url=""> 
              <text>帮助与反馈</text>
              <text class="ft">></text> 
          </navigator> 
-    </view><!--phone结束--> 
+    </view>phone结束  -->
 </view><!--me_index结束-->

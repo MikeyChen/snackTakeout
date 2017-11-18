@@ -22,6 +22,8 @@ Page({
     var selAddress = that.data.selAddress;
     var typeList=that.data.typeList;
     var isEmpty = that.data.addr;
+    var wrap_fee=that.data.fee;
+    var packing_fee=that.data.sendFee;
     var orderid;
     //判断地址是否为空
     if (isEmpty == "" || isEmpty=="请添加收货地址"){
@@ -39,6 +41,12 @@ Page({
       })
     }else{
       //地址不为空，跳转到订单页面
+      var timestamp ;
+      var nonceStr ;
+      var paySign; 
+      var Package;
+      var signType = 'MD5';
+      var orderid;
       wx.request({
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -49,32 +57,24 @@ Page({
           weixin_user_id: selAddress.weixin_user_id,
           total: that.data.allPrice,
           dishData: JSON.stringify(typeList),
-          store_id: typeList[0].store_id
+          store_id: typeList[0].store_id,
+          wrap_fee:wrap_fee,
+          packing_fee:packing_fee
         },
         url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
-        success: function (res) {
+        success: function (parm) {
          console.log("价格");
-          console.log(res.data);
-          orderid = res.data.orderid;
-          wx.setStorage({
-            key: 'sdkData',
-            data: {'sdk':res.data.sdkData,orderId:res.data.orderid},
-          })
-          //var str = JSON.stringify(res.data);
-          
+          console.log(parm.data);
+          orderid = parm.data.orderid;
+          timestamp = String(parm.data.sdkData.timeStamp);
+          nonceStr = parm.data.sdkData.nonceStr;
+          paySign = parm.data.sdkData.paySign;
+          Package = parm.data.sdkData.package;
           wx.showModal({
             title: '提示',
             content: '立即支付吗',
             success: function (res) {
               if (res.confirm) {
-              wx.getStorage({
-                key: 'sdkData',
-                success: function(parm) {
-                  var timestamp = String(parm.data.sdk.timeStamp);
-                  var nonceStr = parm.data.sdk.nonceStr;
-                  var paySign = parm.data.sdk.paySign;
-                  var Package = parm.data.sdk.package;
-                  var signType = 'MD5';
                   wx.requestPayment({
                     'timeStamp': timestamp,
                     'nonceStr': nonceStr,
@@ -93,29 +93,22 @@ Page({
                           orderid: orderid,
                         },
                         url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
-                      })
-                      
+                        success:function(){
+                          wx.navigateTo({
+                            url: '/pages/order/orderList/index',
+                          })
+                        },
+                      })  
                     },
                     'fail': function (res) {
                       console.log("-----------");
                       console.log(res);
                     },
-                    complete: function (res) {
-                      console.log("++++++++++")
-                      console.log(res);
-                    }
                   })
-                },
-              })
-
-
-
-
-
-
-
                 
+            
               } else {
+                console.log("用户点击取消");
                 wx.navigateTo({
                   url: '/pages/order/orderList/index?orderid='+orderid,
                 })
@@ -138,6 +131,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    that.setData({
+      totalPrice:options.total,
+      fee:options.fee,
+      sendFee:options.sendFee
+    })
     var arr=[];
   //购物车食物
     wx.getStorage({
@@ -163,14 +161,7 @@ Page({
         })
       },
     })
-    wx.getStorage({
-      key: 'price',
-      success: function(res) {
-        that.setData({
-          allPrice:res.data
-        })
-      },
-    })
+   
     
     //送餐到达时间
     var hour = myDate.getHours();

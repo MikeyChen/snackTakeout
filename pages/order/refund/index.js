@@ -22,16 +22,6 @@ Page({
   //申请退款
   refund: function () {
     var that = this;
-    //var refund_reason=that.data.refund_reason;
- 
-    // wx.getStorage({
-    //   key: 'sdkData',
-    //   success: function (res) {
-    //     console.log("订单参数");
-    //     orderid = res.data.orderId;
-    //     console.log(orderid);
-    //   },
-    // })
     console.log("申请退款订单编号");
     console.log(that.data.orderid);
      wx.request({
@@ -48,7 +38,7 @@ Page({
          console.log("申请退款");
          console.log(res);
        var data=res.data;
-         if(data.code == '200'){
+        //  if(data.code == '200'){
            that.setData({
              className:'model1',
              on:'on',
@@ -66,8 +56,7 @@ Page({
                });
              }
            }, 1000);
-         }else{
-         }
+         
        },
       
      })
@@ -77,10 +66,9 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    that.setData({
-      orderid:options.orderid
-    })
-    //console.log("申请支付订单id");
+    console.log("申请支付订单id");
+    console.log(options);
+    
    
     var that=this;
     //获取设备信息
@@ -96,7 +84,7 @@ Page({
     var left = (windowWidth - elementWidth) / 2;
     that.setData({
       price: options.price,
-      id: options.id,
+      orderid: options.orderid,
       left: left
     });
 

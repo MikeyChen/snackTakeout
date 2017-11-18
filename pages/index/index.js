@@ -30,8 +30,10 @@ Page({
     var id = e.currentTarget.dataset.id;
     var img = e.currentTarget.dataset.img;
     var name = e.currentTarget.dataset.name;
+    var begin_price = e.currentTarget.dataset.begin_price;
+    var packing_fee = e.currentTarget.dataset.packing_fee;
     wx.navigateTo({
-      url: '/pages/order/index1/index?id=' + id+'&img='+img+'&name='+name,
+      url: '/pages/order/index1/index?id=' + id+'&img='+img+'&name='+name+'&begin_price='+begin_price+'&packing_fee='+packing_fee,
     })
   },
   onLoad: function () {
@@ -133,12 +135,9 @@ Page({
       success: function (res) {
         console.log("所有店铺");
         console.log(res);
-        //console.log(res);
         that.setData({
-          shopList: res.data
+          shopList:res.data
         })
-
-        //console.log(that.data.shopList);
       },
     })
 

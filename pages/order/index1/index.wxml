@@ -6,7 +6,7 @@
     </view>
     <view class='shop_info'>
         <view class='name'>{{store_name}}</view>
-        <view class='tip'>起送￥20  |  配送￥6</view>
+        <view class='tip'>起送￥{{begin_price}} |  配送￥{{packing_fee}}</view>
         <view  class='notice'><text class='word'>欢迎光临老三家曲靖在页面加载完毕之后，可以通过下面的方法来初始化该跑马灯插件。2123567899456123111111119999999999999999999</text></view>
         <!-- <image src='/imgs/tips.gif'></image>： -->
     </view>
@@ -38,7 +38,7 @@
                             </view>
                             <view class='info' bindtap='shopDetail'>
                                 <view class='name'>{{dish.dish_name}}</view>
-                                <view class='ct'>主菜210g+时蔬+咸菜+米饭咸菜+米饭</view>
+                                <view class='ct'>{{dish.backup}}</view>
                                 <view class='price'>￥{{dish.price}}/份</view>
                             </view>
                             <view class='btn'>
@@ -86,7 +86,8 @@
     </block>
     </block>
     
-    <view><text class='l'>餐盒费</text><text class='r'>￥1</text></view>
+    <view><text class='l'>餐盒费</text><text class='r'>￥{{fee}}</text></view>
+     <view><text class='l'>配送费</text><text class='r'>￥{{packing_fee}}</text></view>
     
 </view><!--cartTip-->
 <!-- 遮罩层 -->
