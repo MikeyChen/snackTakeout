@@ -117,87 +117,82 @@ Page({
   pay:function(e){
     var that=this;
     var price = e.currentTarget.dataset.price;
-    var orderid;
-    wx.getStorage({
-      key: 'sdkData',
-      success: function(res) {
-         console.log("订单参数");
-         //orderid = res.data.orderId;
-         that.setData({
-           orderid: res.data.orderId
-         })
-         //console.log(orderid);
-      },
+    var orderid = e.currentTarget.dataset.orderid;
+    // wx.request({
+    //   header: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   },
+    //   method: 'post',
+    //   data: {
+    //     weixin_user_id: wx.getStorageSync("weixin_user_id"),
+    //     orderid:orderid,
+    //   },
+    //   url: app.globalData.webSite + 'weixin.php/wechat/pay',
+    //   success:function(res){
+    //     console.log("hhhhhhhhhhhhh");
+    //     var obj=res.data;
+    //     console.log(res.data.sdkData);
+    //     var timestamp = String(res.data.timeStamp);
+    //     var nonceStr = res.data.sdkData.nonceStr;
+    //     var paySign = res.data.sdkData.paySign;
+    //     var Package = res.data.sdkData.package;
+    //     var signType = 'MD5';
+    //     var order_id = res.data.orderid;
+    //     wx.requestPayment({
+    //       'timeStamp': timestamp,
+    //       'nonceStr': nonceStr,
+    //       'package': Package,
+    //       'signType': signType,
+    //       'paySign': paySign,
+    //       'success': function (res) {
+    //         // console.log("支付成功");
+    //         wx.request({
+    //           header: {
+    //             "Content-Type": "application/x-www-form-urlencoded"
+    //           },
+    //           method: 'post',
+    //           data: {
+    //             //weixin_user_id: wx.getStorageSync("weixin_user_id"),
+    //             orderid: order_id,
+    //           },
+    //           url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
+    //         })
+    //         wx.navigateTo({
+    //           url: '/pages/order/orderList/index',
+    //         })
+    //       },
+    //       'fail': function (res) {
+    //         console.log("-----------");
+    //         console.log(res);
+    //       },
+    //       complete: function (res) {
+    //         console.log("++++++++++")
+    //         console.log(res);
+    //       }
+    //     })
+
+
+
+
+    //     var objs=JSON.stringify(obj);
+    //     wx.navigateTo({
+    //   url: '/pages/order/orderPay/index?price=' + price,
+    // })
+    //   },
+    // })
+
+
+
+
+
+
+
+    
+    wx.navigateTo({
+      url: '/pages/order/orderPay/index?price=' + price + '&orderid=' + orderid,
     })
-    wx.request({
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      method: 'post',
-      data: {
-        weixin_user_id: wx.getStorageSync("weixin_user_id"),
-        orderid:that.data.orderid,
-      },
-      url: app.globalData.webSite + 'weixin.php/wechat/pay',
-      success:function(res){
-        console.log("hhhhhhhhhhhhh");
-        console.log(res);
-        var timestamp = String(res.data.timeStamp);
-        var nonceStr = res.data.sdk.nonceStr;
-        var paySign = res.data.sdk.paySign;
-        var Package = res.data.sdk.package;
-        var signType = 'MD5';
-        wx.requestPayment({
-          'timeStamp': timestamp,
-          'nonceStr': nonceStr,
-          'package': Package,
-          'signType': signType,
-          'paySign': paySign,
-          'success': function (res) {
-            // console.log("支付成功");
-            var orderid;
-            wx.getStorage({
-              key: 'sdkData',
-              success: function (res) {
-                //console.log("订单参数");
-                orderid = res.data.orderId;
-              },
-            })
-            wx.request({
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              method: 'post',
-              data: {
-                //weixin_user_id: wx.getStorageSync("weixin_user_id"),
-                orderid: orderid,
-              },
-              url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
-            })
-            wx.navigateTo({
-              url: '/pages/order/orderList/index',
-            })
-          },
-          'fail': function (res) {
-            console.log("-----------");
-            console.log(res);
-          },
-          complete: function (res) {
-            console.log("++++++++++")
-            console.log(res);
-          }
-        })
 
 
-
-
-
-        wx.navigateTo({
-      url: '/pages/order/orderPay/index?price=' + price
-    })
-      },
-    })
-   
   },
   //点击再来一单按钮
   again:function(e){
@@ -307,6 +302,8 @@ Page({
           orderList: orderList,
           
         })
+        console.log("订单列表");
+        console.log(that.data.orderList);
       },
    
     })

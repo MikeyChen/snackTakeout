@@ -30,7 +30,7 @@
         
         <view class='btns'>
             <view class='again {{show}}' bindtap='again' > 再来一单</view>
-            <view bindtap='pay' class='{{none}}' data-price="{{order.sum}}">立即付款</view>
+            <view bindtap='pay' class='{{none}}' data-price="{{order.sum}}" data-orderid="{{order.orderid}}">立即付款</view>
             <view bindtap='refund' class='{{refund}}' data-price="{{order.sum}}">申请退款</view>
         </view>
     </view><!--order结束-->
