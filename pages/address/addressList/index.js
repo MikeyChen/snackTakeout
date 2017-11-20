@@ -222,6 +222,7 @@ Page({
             addressList.push(val);
            
           })
+          
           if (addressList.length != 0) {
             var address_id=that.data.address_id;
             if (address_id){
@@ -229,7 +230,7 @@ Page({
                 if (val.id == address_id) {
                   addressList[key].isSelected = true;
                   that.setData({
-                    addressList: addressList,
+                    //addressList: addressList,
                     id: addressList[key].id,//设置默认地址
                   })
                 }
@@ -237,11 +238,12 @@ Page({
             }else{
               addressList[0].isSelected = true;
               that.setData({
-                addressList: addressList,
                 id: addressList[0].id,//设置默认地址
               })
             }
-            
+             that.setData({
+               addressList: addressList,
+             })
           } else {
             that.setData({
               addressList: [],
@@ -253,7 +255,7 @@ Page({
     })
   },
   onLoad: function (options) {
-    console.log(options);
+    //console.log(options);
     var that = this;
     that.setData({
       address_id:options.address_id,

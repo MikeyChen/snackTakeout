@@ -59,6 +59,6 @@ App({
     userInfo: null,
     openId: '',
     loginStatus: false,
-    webSite: 'http://192.168.3.172/'
+    webSite: 'http://byu3447150001.my3w.com/'
   }
 })

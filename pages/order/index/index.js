@@ -281,8 +281,6 @@ hidCart:function(){
             list[key]['id'] = 'A' + val.id
           });
           //   list.push(ff);
-          console.log("tttttttttt");
-          console.log(list);
           that.setData({
             foodList: list,
             name: res.data[0].category_name,
