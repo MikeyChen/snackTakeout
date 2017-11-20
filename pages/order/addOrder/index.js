@@ -55,7 +55,7 @@ Page({
         data: {
           address_id: selAddress.id,
           weixin_user_id: selAddress.weixin_user_id,
-          total: that.data.allPrice,
+          total: that.data.totalPrice,
           dishData: JSON.stringify(typeList),
           store_id: typeList[0].store_id,
           wrap_fee:wrap_fee,
@@ -63,8 +63,6 @@ Page({
         },
         url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
         success: function (parm) {
-         console.log("价格");
-          console.log(parm.data);
           orderid = parm.data.orderid;
           timestamp = String(parm.data.sdkData.timeStamp);
           nonceStr = parm.data.sdkData.nonceStr;
@@ -108,7 +106,7 @@ Page({
                 
             
               } else {
-                console.log("用户点击取消");
+                //console.log("用户点击取消");
                 wx.navigateTo({
                   url: '/pages/order/orderList/index?orderid='+orderid,
                 })
@@ -141,10 +139,7 @@ Page({
     wx.getStorage({
       key: 'typeList',
       success: function(res) {
-        console.log("订单");
-        console.log(res);
         res.data.typeList.forEach(function(val,key){
-          console.log("val");
           if(val.child){
             val.child.forEach(function (val1, key1) {
               if (val1.flag != 0) {
@@ -207,12 +202,11 @@ Page({
     wx.getStorage({
       key: 'selected',
       success: function (res) {
-        // console.log("地址");
-         console.log(res.data);
         //var addr = res.data.name + res.data.address + res.data.street;
         that.setData({
           selAddress: res.data,
-          addr: res.data.name + res.data.address + res.data.street
+          addr: res.data.name + res.data.address + res.data.street,
+          address_id: res.data.id,
         })
       },
     })

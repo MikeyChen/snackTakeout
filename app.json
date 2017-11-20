@@ -1,31 +1,17 @@
 {
   "pages": 
   [ 
-   
     "pages/index/index",
-    "pages/order/index1/index",
-    "pages/login/index",
     "pages/order/refund/index",
-    
-    "pages/form/index",
    "pages/order/orderList/index",
     "pages/order/index/index",
-   "pages/address/addressList2/index",
     "pages/address/addressList/index",
-    "pages/address/editAddress/index",
-    "pages/test7/index",
     "pages/order/orderDetail/index",
     "pages/order/orderPay/index",
     "pages/order/addOrder/index",
- 
-    
-   
- 
     "pages/shop/index",
     "pages/me/phone/index",
-    
-    "pages/me/index/index" 
-    
+    "pages/me/index/index"   
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -20,7 +20,6 @@ Page({
   //点击订单类型
   orderNavClick:function(e){
     var that=this;
-    console.log(e);
     var num=e.currentTarget.dataset.active;
     var animation = 'animation' + num;
     var list=[];
@@ -29,8 +28,6 @@ Page({
       active:num,
       animation: animation
     })
-    console.log("index");
-    console.log(index);
     var orderList = [];
     var list = [];
     wx.request({
@@ -45,7 +42,6 @@ Page({
       url: app.globalData.webSite + 'weixin.php/Wechat/getOrder/weixin_user_id/1',
       success: function (res) {
         var data = res.data;
-        console.log("订单列表");
         //console.log(data);
         // 0 待付款 1 配送中 2退款中 3 已完成
       
@@ -103,8 +99,6 @@ Page({
     var that=this;
     var price = e.currentTarget.dataset.sum;
     var orderid = e.currentTarget.dataset.orderid;
-    console.log("hdfhdkjfdkfjdk");
-    console.log(price);
     wx.navigateTo({
       url: '/pages/order/orderPay/index?price=' + price + '&orderid=' + orderid,
     })
@@ -122,7 +116,6 @@ Page({
     var that=this;
     var price = e.currentTarget.dataset.sum;
     var orderid = e.currentTarget.dataset.orderid;
-    console.log(e);
     wx.navigateTo({
       url: '/pages/order/refund/index?price='+price+'&orderid='+orderid,
     })
@@ -200,7 +193,6 @@ Page({
     })
     wx.getSystemInfo({
       success: function (res) {
-        console.log(res);
         var height = res.windowHeight / 2;
         console.log(height);
         that.setData({

@@ -10,7 +10,7 @@
 </view><!--refund-->
  <view class="{{className}}"  >
         
-    </view>
+  </view>
      <view class="show {{on}}" style="width:{{width}}px;height:{{height}}px;left:{{left}}px">
        <text>申请成功</text>
        <text>将在{{second}}秒后自动跳转</text>

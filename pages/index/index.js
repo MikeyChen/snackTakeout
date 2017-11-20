@@ -33,7 +33,7 @@ Page({
     var begin_price = e.currentTarget.dataset.begin_price;
     var packing_fee = e.currentTarget.dataset.packing_fee;
     wx.navigateTo({
-      url: '/pages/order/index1/index?id=' + id+'&img='+img+'&name='+name+'&begin_price='+begin_price+'&packing_fee='+packing_fee,
+      url: '/pages/order/index/index?id=' + id+'&img='+img+'&name='+name+'&begin_price='+begin_price+'&packing_fee='+packing_fee,
     })
   },
   onLoad: function () {
@@ -102,7 +102,7 @@ Page({
       wx.getUserInfo({
         success: res => {
           wx.request({
-            url: 'http://192.168.3.172/weixin.php/wechat/saveUserinfo', //仅为示例，并非真实的接口地址
+            url: app.globalData.webSite+'/weixin.php/wechat/saveUserinfo', //仅为示例，并非真实的接口地址
             data: {
               rawData: res.rawData,
               weixin_user_id: wx.getStorageSync('weixin_user_id'),
@@ -133,8 +133,6 @@ Page({
       method: 'get',
       url: app.globalData.webSite + '/weixin.php/wechat/getstore',
       success: function (res) {
-        console.log("所有店铺");
-        console.log(res);
         that.setData({
           shopList:res.data
         })
@@ -146,7 +144,6 @@ Page({
 
   },
   getUserInfo: function (e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

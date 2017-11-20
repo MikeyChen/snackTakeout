@@ -1,7 +1,7 @@
 <!--pages/order/addOrder/index.wxml-->
 <!-- 选择收货地址 -->
 <view class='addAddress'>
-   <navigator url='/pages/address/addressList/index'>
+   <navigator url='/pages/address/addressList/index?address_id={{address_id}}'>
    <view class='box'>
       <image src='/imgs/add_icon.png'></image>
       <text class='word'>{{addr}}</text>

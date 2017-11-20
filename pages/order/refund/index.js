@@ -22,8 +22,6 @@ Page({
   //申请退款
   refund: function () {
     var that = this;
-    console.log("申请退款订单编号");
-    console.log(that.data.orderid);
      wx.request({
        header: {
          "Content-Type": "application/x-www-form-urlencoded"
@@ -35,8 +33,6 @@ Page({
         //  refund_reason:refund_reason
        },
        success:function(res){
-         console.log("申请退款");
-         console.log(res);
        var data=res.data;
         //  if(data.code == '200'){
            that.setData({
@@ -66,10 +62,6 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    console.log("申请支付订单id");
-    console.log(options);
-    
-   
     var that=this;
     //获取设备信息
     wx.getSystemInfo({

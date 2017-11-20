@@ -16,7 +16,7 @@ page{background: #efefef;}
 .foodBox .food .name text{display: block;}
 .foodBox .food .price{position: absolute;right:20rpx;top:20rpx;}
 /* 餐盒费，配送费 */
-.fee{background: #fff;margin:20rpx 3%;font-size:28rpx;border-radius: 10rpx;padding:30rpx 25rpx;}
+.fee{background: #fff;margin:20rpx 3%;font-size:28rpx;border-radius: 10rpx;padding:30rpx 25rpx;margin-bottom:150rpx;}
 .fee view{position: relative;}
 .fee view.send{margin-top:15rpx;border-top:1px solid #efefef;padding-top:15rpx;}
 .fee view text{position: absolute;right:20rpx;top:5rpx;color:#F80000;}

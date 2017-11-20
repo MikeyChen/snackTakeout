@@ -14,8 +14,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log("2017嘉禾");
-   console.log(options);
     that.setData({
       sum:options.price,
       orderid:options.orderid,
@@ -44,8 +42,6 @@ Page({
             },
             url: app.globalData.webSite + 'weixin.php/wechat/pay',
             success:function(res){
-              console.log("立即付款接口");
-              console.log(res);
               var timestamp = String(res.data.sdkData.timeStamp);
               var nonceStr = res.data.sdkData.nonceStr;
               var paySign = res.data.sdkData.paySign;

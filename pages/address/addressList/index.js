@@ -115,7 +115,7 @@ Page({
       isSelected:true,//为true选中地址s
       selected:selected
     })
-    console.log(that.data.addressList);
+    
   },
   //删除收货地址
   delAddr:function(e){
@@ -124,8 +124,6 @@ Page({
     var weixin_user_id = wx.getStorageSync("weixin_user_id");
     var addressList = [];
     var id = e.currentTarget.dataset.id;
-    console.log("删除");
-    console.log(id);
     wx.showModal({
       title: '删除提示',
       content: '确定删除吗？',
@@ -186,7 +184,6 @@ Page({
     var addressList=that.data.addressList;
     addressList.forEach(function(val,key){
       if(val.isSelected){
-       //selected.push(val);
        wx.setStorage({
          key: 'selected',
          data: val,
@@ -214,10 +211,7 @@ Page({
         weixin_user_id: weixin_user_id,
       },
       success: function (res) {
-        console.log("//////////////////");
-        console.log(res);
         if (res.data.code == 0) {
-          console.log("地址列表");
           res.data.data.forEach(function (val, key) {
             if(val.sex==1){
               val.sex="女士";
@@ -229,15 +223,26 @@ Page({
            
           })
           if (addressList.length != 0) {
-            console.log("地址列表不为空");
-            console.log(addressList);
-            addressList[0].isSelected = true;
-            that.setData({
-              addressList: addressList,
-              id: addressList[0].id,//设置默认地址
-            })
+            var address_id=that.data.address_id;
+            if (address_id){
+              addressList.forEach(function (val, key) {
+                if (val.id == address_id) {
+                  addressList[key].isSelected = true;
+                  that.setData({
+                    addressList: addressList,
+                    id: addressList[key].id,//设置默认地址
+                  })
+                }
+              })
+            }else{
+              addressList[0].isSelected = true;
+              that.setData({
+                addressList: addressList,
+                id: addressList[0].id,//设置默认地址
+              })
+            }
+            
           } else {
-            console.log("地址列表为空");
             that.setData({
               addressList: [],
             })
@@ -248,7 +253,11 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options);
     var that = this;
+    that.setData({
+      address_id:options.address_id,
+    })
     that.getList();
   },
 
