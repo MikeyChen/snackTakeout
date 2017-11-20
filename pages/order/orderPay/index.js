@@ -42,6 +42,8 @@ Page({
             },
             url: app.globalData.webSite + 'weixin.php/wechat/pay',
             success:function(res){
+              console.log("支付参数");
+              console.log(res);
               var timestamp = String(res.data.sdkData.timeStamp);
               var nonceStr = res.data.sdkData.nonceStr;
               var paySign = res.data.sdkData.paySign;
