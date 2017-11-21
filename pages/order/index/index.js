@@ -233,7 +233,8 @@ hidCart:function(){
    */
   onLoad: function (options) {
     var that = this;
-  
+    console.log("参数");
+    console.log(options);
     //获取屏幕信息
     wx.getSystemInfo({
      
@@ -276,12 +277,15 @@ hidCart:function(){
           var list = [];
           res.data.forEach(function (val, key) {
             typeList.push(val.category_name);
-            list.push(val);
             if(val.child){
+              val.child.forEach(function(val1,key1){
+                val.child[key1].price = val.child[key1].price/100;
+              })
               that.setData({
-                wrap_fee: res.data[0].child[0].wrap_fee,
+                wrap_fee: res.data[0].child[0].wrap_fee/100,
               })
             }
+            list.push(val);
           })
           list.forEach(function (val, key) {
             list[key]['id'] = 'A' + val.id
@@ -291,8 +295,10 @@ hidCart:function(){
             foodList: list,
             name: res.data[0].category_name,
            
-           //typeList:typeList
+            //typeList:typeList
           })
+          
+         
         }else{
           res.data=[]
         }

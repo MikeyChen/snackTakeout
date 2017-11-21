@@ -92,12 +92,14 @@ Page({
       },
   
     })
-    console.log(that.data.empty);
+    //console.log(that.data.empty);
   },
   //支付
   pay:function(e){
     var that=this;
-    var price = e.currentTarget.dataset.sum;
+    console.log(e);
+    var sendFee=that.data.sendFee;
+    var price = e.currentTarget.dataset.allprice+sendFee;
     var orderid = e.currentTarget.dataset.orderid;
     wx.navigateTo({
       url: '/pages/order/orderPay/index?price=' + price + '&orderid=' + orderid,
@@ -124,9 +126,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     var that=this;
+    that.setData({
+      totalPrice:options.totalPrice,
+      wrap_fee:options.wrap_fee,
+      packing_fee:options.packing_fee
+    })
     var orderList=[];
     var list=[];
+    var storeList=[];
+    var idList=[];
     wx.request({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -138,6 +148,40 @@ Page({
       },
       url: app.globalData.webSite + 'weixin.php/Wechat/getOrder/weixin_user_id/1',
       success: function (res) {
+        wx.request({
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: 'get',
+          url: app.globalData.webSite + '/weixin.php/wechat/getstore',
+          success: function (fee) {
+           // console.log("订单列表所有店铺");
+           // console.log(fee);
+            if (fee.data) {
+              storeList=fee.data;
+            
+              fee.data.forEach(function (val, key) {
+                fee.data[key].begin_price = fee.data[key].begin_price / 100;
+                fee.data[key].packing_fee = fee.data[key].packing_fee / 100;
+               
+              })
+            }
+           
+            for (var i = 0; i < storeList.length; i++) {
+
+              for (var j = 0; j < idList.length; j++) {
+                if (idList[j] == storeList[i].id) {
+                  that.setData({
+                    sendFee: storeList[i].packing_fee
+                  })
+                 break;
+                    
+                }
+              }
+            }
+            
+          },
+        })
         var data=res.data;
           // 0 待付款 1 配送中 2退款中 3 已完成
         if(data.code == 0){
@@ -151,15 +195,18 @@ Page({
               empty: 'empty_box'
             })
           }
-          //orderList.push(data.data);
-          //list[key]['id'] = 'A' + val.id
           data.data.forEach(function(val,key){
             data.data[key]['sum']=0;
+            data.data[key]['allPrice']=0;
             val.dishData.forEach(function(val1,key1){
-              data.data[key]['sum'] += val1.total;
+              idList.push(val1.store_id);
+              data.data[key]['fee'] = Number(val1.wrap_fee)/100*val1.flag;
+              data.data[key]['sum'] = data.data[key]['sum'] + val1.total;//总餐钱
+              data.data[key]['allPrice'] = data.data[key]['allPrice'] + data.data[key]['sum'] + data.data[key]['fee'];//餐钱+餐盒费
             })
             orderList.push(val)
           })
+          
           orderList.forEach(function (val, key) {
             if (val.status == '0') {
               console.log(val.status);

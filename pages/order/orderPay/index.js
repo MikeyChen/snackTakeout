@@ -42,8 +42,6 @@ Page({
             },
             url: app.globalData.webSite + 'weixin.php/wechat/pay',
             success:function(res){
-              console.log("支付参数");
-              console.log(res);
               var timestamp = String(res.data.sdkData.timeStamp);
               var nonceStr = res.data.sdkData.nonceStr;
               var paySign = res.data.sdkData.paySign;
@@ -64,7 +62,7 @@ Page({
                     },
                     method: 'post',
                     data: {
-                      //weixin_user_id: wx.getStorageSync("weixin_user_id"),
+                      weixin_user_id: wx.getStorageSync("weixin_user_id"),
                       orderid: order_id,
                     },
                     url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',

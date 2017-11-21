@@ -135,15 +135,20 @@ Page({
       success: function (res) {
         console.log("所有店铺");
         console.log(res);
-        that.setData({
-          shopList:res.data
-        })
+        if(res.data){
+          res.data.forEach(function (val, key) {
+            res.data[key].begin_price = res.data[key].begin_price/100;
+            res.data[key].packing_fee = res.data[key].packing_fee / 100;
+          })
+         
+          that.setData({
+            shopList: res.data
+          })
+        }else{
+          res.data=[]
+        }
       },
     })
-
-
-
-
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo

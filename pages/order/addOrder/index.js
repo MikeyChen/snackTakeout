@@ -87,7 +87,7 @@ Page({
                         },
                         method: 'post',
                         data: {
-                          //weixin_user_id: wx.getStorageSync("weixin_user_id"),
+                          weixin_user_id: wx.getStorageSync("weixin_user_id"),
                           orderid: orderid,
                         },
                         url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
@@ -107,6 +107,8 @@ Page({
             
               } else {
                 //console.log("用户点击取消");
+                //var wrap_fee = that.data.fee;
+                //var packing_fee = that.data.sendFee;
                 wx.navigateTo({
                   url: '/pages/order/orderList/index?orderid='+orderid,
                 })
