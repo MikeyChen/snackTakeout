@@ -30,6 +30,9 @@
         <text class='word'>{{shop.store_name}}</text>
         <view class='grey'></view>
         <view class='dis'>
+         {{shop.address}}
+        </view>
+        <view class='dis'>
           <text>距离：</text>
           <text>{{shop.distance}}km</text>
         </view>
@@ -45,6 +48,9 @@
      <view class='r'>
         <text class='word'>{{shop.store_name}}</text>
         <view class='grey'></view>
+        <view class='dis'>
+         {{shop.address}}
+        </view>
         <view class='dis'>
           <text>距离：</text>
           <text>{{shop.distance}}km</text>
