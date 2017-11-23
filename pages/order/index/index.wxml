@@ -7,7 +7,7 @@
     <view class='shop_info'>
         <view class='name'>{{store_name}}</view>
         <view class='tip'>起送￥{{begin_price}} |  配送￥{{packing_fee}}</view>
-        <view  class='notice'><text class='word'>欢迎光临老三家曲靖在页面加载完毕之后，可以通过下面的方法来初始化该跑马灯插件。2123567899456123111111119999999999999999999</text></view>
+        <view  class='notice'><text class='word'>欢迎光临{{store_name}}</text></view>
         <!-- <image src='/imgs/tips.gif'></image>： -->
     </view>
   </view>
@@ -18,12 +18,6 @@
                <view class="pub {{colorNum==index?'bgWhite':''}}" bindtap='click' data-num="{{index}}" data-id="{{item.id}}" data-name="{{item.category_name}}">{{item.category_name}}
                </view>
           </block>
-            <!-- <view style='height:80rpx;' data-index='F' bindtap='click'>
-              <text>F</text>
-            </view>
-            <view style='height:80rpx;' data-index='L' bindtap='click'>
-              <text>L</text>
-            </view> -->
       </view>
       <view class='right'>
             <scroll-view scroll-y style="height: 100%;" scroll-into-view="{{toView}}">

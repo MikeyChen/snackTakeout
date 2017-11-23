@@ -23,6 +23,24 @@ Page({
     shoplat: '',
     personlng: '',
     personlat: '',
+    model:"",
+    none:'none'
+  },
+  //点击关闭打烊提示
+  close:function(){
+    var that = this;
+    that.setData({
+      model: "",
+      none: "none"
+    })
+  },
+  //打烊店铺提示
+  closeTip:function(){
+    var that=this;
+    that.setData({
+      model:"model",
+      none:"block"
+    })
   },
   //点击跳转到相应的店铺点餐页面
   jump: function (e) {
@@ -37,8 +55,18 @@ Page({
     })
   },
   onLoad: function () {
-    //var shopList=[];
     var that = this;
+    console.log("===========");
+    wx.getSystemInfo({
+      success: function(res) {
+        that.setData({
+          height:res.windowHeight,
+          width:res.windowWidth,
+          top:res.windowHeight/3,
+        })
+         console.log(res);
+      },
+    })
     var far;
     //////////////////////////////不能删//////////////////////////
     if (app.globalData.userInfo) {
@@ -92,9 +120,6 @@ Page({
       url: app.globalData.webSite + '/weixin.php/wechat/getstore',
       success: function (res) {
         res.data.forEach(function (val, key) {
-          console.log("=============");
-         // Date.parse()
-         console.log(val.work_time.split('-'));
           res.data[key].begin_priceAZ = res.data[key].begin_price / 100;
           res.data[key].packing_fee = res.data[key].packing_fee / 100;
           qqmapsdk.geocoder({
@@ -154,7 +179,7 @@ Page({
         });
 
 
-        console.log(res.data);
+       //console.log(res.data);
       }
     })
   },
