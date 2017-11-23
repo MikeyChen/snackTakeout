@@ -67,14 +67,16 @@ Page({
                     },
                     url: app.globalData.webSite + 'weixin.php/wechat/confirmOrder',
                     success:function(){
-                      wx.navigateTo({
-                        url: '/pages/order/orderList/index',
-                      })
+                      wx.navigateBack();
+                      // wx.navigateTo({
+                      //   url: '/pages/order/orderList/index',
+                      // })
                     },
                   })
                  
                 },
                 'fail': function (res) {
+                  
                   console.log("-----------");
                   console.log(res);
                 },

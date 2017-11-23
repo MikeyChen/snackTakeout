@@ -39,49 +39,7 @@ Page({
   onLoad: function () {
     //var shopList=[];
     var that = this;
-    //地址解析，把地址解析成经纬度
-    qqmapsdk.geocoder({
-      address: that.data.shopAddress,
-      success: function (res) {
-        that.setData({
-          shoplng: res.result.location.lng,
-          shoplat: res.result.location.lat,
-        });
-        //计算距离
-        qqmapsdk.calculateDistance({
-          mode: 'driving',
-          to: [
-            {
-              latitude: that.data.shoplat,
-              longitude: that.data.shoplng,
-            }
-          ],
-          success: function (res) {
-            console.log(res);
-            var far = res.result.elements[0].distance / 1000;
-            var duration = (res.result.elements[0].duration) / 60;
-            var sendTime = Math.round(duration);
-
-            wx.setStorage({
-              key: 'sendTime',
-              data: sendTime,
-            })
-            that.setData({
-              distance: far.toFixed(2),//距离保留两位小数 
-            });
-          },
-          fail: function (res) {
-            console.log("fail");
-            that.setData({
-              distance: '超过10'
-            });
-          },
-        });
-      },
-      fail: function (res) {
-        // console.log(fail);
-      }
-    });
+    var far;
     //////////////////////////////不能删//////////////////////////
     if (app.globalData.userInfo) {
       this.setData({
@@ -113,7 +71,7 @@ Page({
             method: 'POST',
             success: function (res) {
               if (res.data.code == 0) {
-                console.log(res.data.info);
+                // console.log(res.data.info);
               }
             }
           })
@@ -133,23 +91,74 @@ Page({
       method: 'get',
       url: app.globalData.webSite + '/weixin.php/wechat/getstore',
       success: function (res) {
-        console.log("所有店铺");
-        console.log(res);
-        if(res.data){
-          res.data.forEach(function (val, key) {
-            res.data[key].begin_price = res.data[key].begin_price/100;
-            res.data[key].packing_fee = res.data[key].packing_fee / 100;
+        res.data.forEach(function (val, key) {
+          console.log("=============");
+         // Date.parse()
+         console.log(val.work_time.split('-'));
+          res.data[key].begin_priceAZ = res.data[key].begin_price / 100;
+          res.data[key].packing_fee = res.data[key].packing_fee / 100;
+          qqmapsdk.geocoder({
+            address: val.address,
+            success: function (add) {
+              wx.getLocation({
+                type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+                success: function (map) {
+                  //console.log("oooooooooooo");
+                  //console.log(map);
+                  
+                  var latitude = map.latitude
+                  var longitude = map.longitude
+                  that.setData({
+                    latitude: latitude,
+                    longitude: longitude
+                  })
+                 
+                  qqmapsdk.calculateDistance({
+                    mode: 'driving',
+                    from: {
+                      latitude: latitude,
+                      longitude: longitude
+                    },
+                    to: [
+                      {
+                        latitude: add.result.location.lat,
+                        longitude: add.result.location.lng
+                      },
+                    ],
+                    success: function (dis) {
+                      //console.log(dis);
+                      var duration = (dis.result.elements[0].duration) / 60;
+                      var sendTime = Math.round(duration);
+                      wx.setStorage({
+                        key: 'sendTime',
+                        data: sendTime,
+                      })
+                      res.data[key]['distance'] = ((dis.result.elements[0].distance) / 1000).toFixed(2);
+                      console.log(res.data[key]['distance']);
+                      that.setData({
+                        shopList: res.data
+                      });
+                    },
+                    fail: function (d) {
+                      res.data[key]['distance'] = '超过10';
+                      that.setData({
+                        shopList: res.data
+                      });
+                    }
+                  })
+                }
+              })
+              
+            },
           })
-         
-          that.setData({
-            shopList: res.data
-          })
-        }else{
-          res.data=[]
-        }
-      },
+        });
+
+
+        console.log(res.data);
+      }
     })
   },
+
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

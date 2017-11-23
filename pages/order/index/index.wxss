@@ -15,8 +15,8 @@ page{height:100%;}
   border-top:4rpx solid #fff;
 }
 .header .img{float:left;width:25%; }
-.header image{width:160rpx;height:160rpx;border-radius: 50%;position: relative;top:4rpx;}
-.header .shop_info{width:70%;float:left; }
+.header image{width:160rpx;height:160rpx;border-radius: 50%;position: relative;top:4rpx;border:2px solid #fff;}
+.header .shop_info{width:70%;float:left;}
 .header .shop_info .notice image{width:48rpx;height:48rpx;position: relative;top:-5rpx;}
 .header .shop_info view{margin-top:15rpx}
 .header .shop_info view.notice{width:100%;overflow: hidden; margin-rigth:20rpx;}
@@ -46,7 +46,7 @@ to {
   background:#fff;
 }
 .left .pub{background: #fff;text-align: center;padding:40rpx 0;border-bottom:1px solid #fff;color:#666666;}
-.left .bgWhite{background:#f4f4f4;border-left:3px solid #f4f4f4;}
+.left .bgWhite{background:#f4f4f4;border-left:3px solid #7be22a;}
 .right{
   width: 68%;
   height: 100%;

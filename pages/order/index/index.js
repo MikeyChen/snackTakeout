@@ -63,7 +63,6 @@ Page({
     var id = e.currentTarget.dataset.id;
     var num = e.currentTarget.dataset.num;
     that.data.foodList.forEach(function (val, key) {
-      console.log(val.id);
       if (id== val.id) {
         that.setData({
           toView: id,

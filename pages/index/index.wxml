@@ -19,8 +19,25 @@
 </view>
 <!-- 商家列表 -->
 <view class='shopList'>
+<!-- shop.isOpen=1关门  已关门 -->
 <block wx:for="{{shopList}}" wx:key="" wx:for-item="shop">
-   <view class='shop' bindtap='jump' data-id="{{shop.id}}" data-img="{{shop.img}}" data-name="{{shop.store_name}}" data-begin_price="{{shop.begin_price}}" data-packing_fee="{{shop.packing_fee}}">
+   <view wx:if="{{shop.isOpen==1}}" class='shop close'data-id="{{shop.id}}" data-img="{{shop.img}}" data-name="{{shop.store_name}}" data-begin_price="{{shop.begin_price}}" data-packing_fee="{{shop.packing_fee}}">
+     <view class='l'>
+         <image src='/imgs/flower1.png' class='flower'></image>
+         <image src='/imgs/close.jpg'></image>
+     </view>
+     <view class='r'>
+        <text class='word'>{{shop.store_name}}</text>
+        <view class='grey'></view>
+        <view class='dis'>
+          <text>距离：</text>
+          <text>{{shop.distance}}km</text>
+        </view>
+     </view> 
+    
+   </view><!--shop-->
+   <!-- shop.isOpen=0关门 正常营业 -->
+  <view wx:if="{{shop.isOpen==0}}" class='shop' bindtap='jump' data-id="{{shop.id}}" data-img="{{shop.img}}" data-name="{{shop.store_name}}" data-begin_price="{{shop.begin_price}}" data-packing_fee="{{shop.packing_fee}}">
      <view class='l'>
          <image src='/imgs/flower1.png' class='flower'></image>
          <image src='{{webSite}}{{shop.img}}'></image>
@@ -30,11 +47,10 @@
         <view class='grey'></view>
         <view class='dis'>
           <text>距离：</text>
-          <text>{{distance}}km</text>
+          <text>{{shop.distance}}km</text>
         </view>
      </view> 
     
    </view><!--shop-->
-  
    </block>
 </view><!--shopList-->
