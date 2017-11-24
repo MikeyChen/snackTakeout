@@ -24,22 +24,28 @@ Page({
     personlng: '',
     personlat: '',
     model:"",
-    none:'none'
+    none:'none',
+    box:''
   },
   //点击关闭打烊提示
   close:function(){
     var that = this;
     that.setData({
       model: "",
-      none: "none"
+      none: "none",
+      box:''
     })
   },
   //打烊店铺提示
-  closeTip:function(){
+  closeTip:function(e){
+    console.log("滚动");
+    console.log(e);
+    //var top=e.currentTarget.offsetTop;
     var that=this;
     that.setData({
       model:"model",
-      none:"block"
+      none:"block",
+      box:"box"
     })
   },
   //点击跳转到相应的店铺点餐页面
@@ -60,7 +66,7 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
-          height:res.windowHeight,
+          height: res.windowHeight,
           width:res.windowWidth,
           top:res.windowHeight/3,
         })

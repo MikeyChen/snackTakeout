@@ -1,5 +1,5 @@
 <!--index.wxml-->
-
+<view class='{{box}}'>
 <!-- 轮播图 -->
 <swiper indicator-dots="{{indicatorDots}}"
   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style='height:142px;'>
@@ -29,7 +29,7 @@
      <view class='r'>
         <text class='word'>{{shop.store_name}}</text>
         <view class='grey'></view>
-        <view class='dis'>
+        <view class='dis add_box'>
          {{shop.address}}
         </view>
         <view class='dis'>
@@ -48,7 +48,7 @@
      <view class='r'>
         <text class='word'>{{shop.store_name}}</text>
         <view class='grey'></view>
-        <view class='dis'>
+        <view class='dis add_box'>
          {{shop.address}}
         </view>
         <view class='dis'>
@@ -63,8 +63,10 @@
 
 <!-- 
 打烊提示 -->
-<view class='{{model}}'></view>
+<view class='{{model}} {{hid}}' ></view>
  <view class='closeTip' style='top:{{top}}px;display:{{none}}'>
     <image src='/imgs/tip.jpg' class='front'></image>
     <view class='close' bindtap='close'> <image src='/imgs/close.png'></image></view>
 </view> 
+
+</view>
