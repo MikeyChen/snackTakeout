@@ -38,9 +38,6 @@ Page({
   },
   //打烊店铺提示
   closeTip:function(e){
-    console.log("滚动");
-    console.log(e);
-    //var top=e.currentTarget.offsetTop;
     var that=this;
     that.setData({
       model:"model",
@@ -62,7 +59,6 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    console.log("===========");
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
@@ -70,7 +66,6 @@ Page({
           width:res.windowWidth,
           top:res.windowHeight/3,
         })
-         console.log(res);
       },
     })
     var far;

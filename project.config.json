@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.6.0",
-	"appid": "wx203e1116b8467c61",
-	"projectname": "specialFineFoodV",
+	"appid": "wxbd656d12592b4e0c",
+	"projectname": "snackTakeout",
 	"condition": {
 		"search": {
 			"current": -1,
