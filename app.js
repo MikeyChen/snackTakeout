@@ -22,10 +22,6 @@ App({
           method: "POST",
           success: function (res) {
             if (res.data.code == 0) {
-              // wx.setStorage({
-              //   key: 'weixin_user_id',
-              //   data: res.data.weixin_user_id,
-              // })
               wx.setStorageSync("weixin_user_id", res.data.weixin_user_id);
             }
           }
@@ -55,10 +51,10 @@ App({
   },
   
   globalData: {
-    appid: 'wx203e1116b8467c61',
+    appid: ' wxbd656d12592b4e0c',
     userInfo: null,
     openId: '',
     loginStatus: false,
-    webSite: 'http://byu3447150001.my3w.com/'
+    webSite: 'http://www.xcwmps.com/'
   }
 })

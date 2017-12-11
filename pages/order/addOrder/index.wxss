@@ -1,4 +1,4 @@
-/* pages/order/addOrder/index.wxss */
+#f4b21e/* pages/order/addOrder/index.wxss */
 page{background: #efefef;}
 .addAddress{font-size:28rpx;margin:20rpx 3%;background: #fff;}
 .addAddress image{width:50rpx;height:50rpx;}
@@ -23,4 +23,4 @@ page{background: #efefef;}
 /* 提交订单 */
 .submitOrder{width:80%;padding:28rpx 10%;background: #888;position: fixed;bottom:0;left:0;font-size:28rpx;color:#fff;}
 .submitOrder .sumPrice text{color:#F80000;font-size:36rpx;}
-.submitOrder .order{position: absolute;right:0;top:0;background:#feb70f;padding:34rpx 70rpx; }
+.submitOrder .order{position: absolute;right:0;top:0;background:#f4b21e;padding:34rpx 70rpx; }

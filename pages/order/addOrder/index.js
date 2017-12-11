@@ -63,8 +63,6 @@ Page({
         },
         url: app.globalData.webSite + '/weixin.php/wechat/createOrder',
         success: function (parm) {
-          console.log("\\\\\\\\\\\\\\\\");
-          console.log(parm);
           orderid = parm.data.orderid;
           timestamp = String(parm.data.sdkData.timeStamp);
           nonceStr = parm.data.sdkData.nonceStr;
@@ -133,6 +131,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log("总价");
+    console.log(options);
     that.setData({
       totalPrice:options.total,
       fee:options.fee,

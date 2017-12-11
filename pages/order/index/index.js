@@ -81,7 +81,7 @@ Page({
     let foodList = that.data.foodList;  // 获取购物车列表
     var fee;//总餐盒费
     var money=that.data.wrap_fee;//单个餐盒费
-    var sendFee = parseInt(that.data.packing_fee);
+    var sendFee = Number(that.data.packing_fee);
     foodList.forEach(function(val,key){
       if(val.child){
         val.child.forEach(function (val1, key1) {
@@ -232,11 +232,8 @@ hidCart:function(){
    */
   onLoad: function (options) {
     var that = this;
-    console.log("参数");
-    console.log(options);
     //获取屏幕信息
     wx.getSystemInfo({
-     
       success: function(res) {
         var elementWidth = that.data.width;
         var elementHeight = that.data.height;
@@ -268,10 +265,8 @@ hidCart:function(){
       data:{
           id:id,
       },
-      success:function(res){
-        
+      success:function(res){  
         if (res.data.length!=0){
-         
           var typeList = [];
           var list = [];
           res.data.forEach(function (val, key) {
@@ -292,12 +287,9 @@ hidCart:function(){
           //   list.push(ff);
           that.setData({
             foodList: list,
-            name: res.data[0].category_name,
-           
+            name: res.data[0].category_name, 
             //typeList:typeList
-          })
-          
-         
+          }) 
         }else{
           res.data=[]
         }

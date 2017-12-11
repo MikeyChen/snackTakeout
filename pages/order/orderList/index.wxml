@@ -29,11 +29,12 @@
          </block>  
         
         <view class='btns'>
-            <view wx:if="{{order.status=='已完成'||order.status=='退款中'}}" class='again' bindtap='again'> 再来一单                 </view>
-            <view wx:if="{{order.status=='待付款'}}" bindtap='pay'  data-allPrice="{{order.allPrice}}" data-orderid="{                {order.orderid}}" >立即付款
-            </view>
-            <view wx:if="{{order.status=='配送中'}}" bindtap='refund'  data-sum="{{order.sum}}" data-orderid="{                      {order.orderid}}">申请退款
-            </view>
+                  <!-- <view wx:if="{{length > 5}}"> 1 </view>
+                  <view wx:elif="{{length > 2}}"> 2 </view>
+                  <view wx:else> 3 </view> -->
+            <view wx:if="{{order.status=='已完成'||order.status=='退款中'}}" class='again' bindtap='again'> 再来一单</view>
+            <view wx:if="{{order.status=='待付款'}}" bindtap='pay'  data-allPrice="{{order.allPrice}}" data-orderid="{{order.orderid}}" >立即付款</view>
+             <view wx:if="{{order.status=='配送中'}}" bindtap='refund'  data-sum="{{order.sum}}" data-orderid="{{order.orderid}}">申请退款</view> 
         </view>
     </view><!--order结束-->
     </block>   

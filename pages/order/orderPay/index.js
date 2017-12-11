@@ -14,6 +14,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log("总价");
+    console.log(options);
     that.setData({
       sum:options.price,
       orderid:options.orderid,

@@ -99,7 +99,7 @@ Page({
     var that=this;
     console.log(e);
     var sendFee=that.data.sendFee;
-    var price = e.currentTarget.dataset.allprice+sendFee;
+    var price   = e.currentTarget.dataset.allprice+sendFee;
     var orderid = e.currentTarget.dataset.orderid;
     wx.navigateTo({
       url: '/pages/order/orderPay/index?price=' + price + '&orderid=' + orderid,
@@ -126,7 +126,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     var that=this;
     that.setData({
       totalPrice:options.totalPrice,
@@ -159,11 +158,9 @@ Page({
            // console.log(fee);
             if (fee.data) {
               storeList=fee.data;
-            
               fee.data.forEach(function (val, key) {
                 fee.data[key].begin_price = fee.data[key].begin_price / 100;
                 fee.data[key].packing_fee = fee.data[key].packing_fee / 100;
-               
               })
             }
            

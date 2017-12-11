@@ -42,8 +42,7 @@
                               <text class='add' bindtap="add"  data-id="{{dish.dish_id}}" data-index="{{index}}">+</text>
                             </view>      
                         </view><!--food结束-->
-                    </block>
-                 
+                    </block> 
                 </view><!--box-->
           </view><!--foodDetail-->
               </block>
@@ -51,17 +50,6 @@
       </view>
   </view>
   <!-- <view class='bottom'></view> -->
-
-
-
-
-
-
-
-
-
-
-
   <!-- 点击购物车的提示框 -->
 <view class='cartTip {{show}}' >
 
@@ -79,14 +67,11 @@
     </view>
     </block>
     </block>
-    
     <view><text class='l'>餐盒费</text><text class='r'>￥{{fee}}</text></view>
-     <view><text class='l'>配送费</text><text class='r'>￥{{packing_fee}}</text></view>
-    
+     <view><text class='l'>配送费</text><text class='r'>￥{{packing_fee}}</text></view> 
 </view><!--cartTip-->
 <!-- 遮罩层 -->
 <view class='shade {{shadeShow}}' style='height:{{height}}px;width:{{width}}px' bindtap="hidCart"></view>
-
 <!-- 底部购物车 -->
 <view class='cart'>
     <view class='imgBox'>
@@ -97,12 +82,8 @@
     <button class="{{allNum>0?'noOpcatity':''}}"  bindtap="account" data-all="{{totalPrice}}" disabled="{{allNum>0?'':'kk'}}">去结算</button>
 </view>
 </view>
-
-
-
 <!-- 详情 -->
-<view class="{{className}}" bindtap='model' >
-  
+<view class="{{className}}" bindtap='model' >  
 </view>
 <view class='detail {{appear}}'bindtap='model' >
    <view class='img'>

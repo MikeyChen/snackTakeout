@@ -1,4 +1,4 @@
-#feb70f/* pages/hotel/order_pay/index.wxss */
+/* pages/hotel/order_pay/index.wxss */
 /*大容器*/
 page{background-color: #F8F8F8;}
 .all{
@@ -85,5 +85,5 @@ page{background-color: #F8F8F8;}
 }
 .payment.active {
   /* background: #3399ff; */
-   background: #feb70f; 
+   background: #f4b21e; 
 }

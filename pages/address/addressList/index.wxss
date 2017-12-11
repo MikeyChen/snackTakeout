@@ -13,11 +13,11 @@ page{background: #efefef;font-size:28rpx;}
 .list .address icon{position: absolute;top:29rpx;left:0%;}
 .list .address view:first-child{margin-bottom:10rpx;}
 .list .address:last-child{border-bottom:none;}
-.list .address .img{position: absolute;top:34rpx;right:0rpx;color:#feb70f}
+.list .address .img{position: absolute;top:34rpx;right:0rpx;color:#f4b21e}
 .list .address .del{right:70rpx;}
 .list .address .img image{width:48rpx;height:48rpx;}
 /* 确定按钮 */
-.btn{width:100%;background:#feb70f;padding:25rpx;text-align: center;color:#fff;position: absolute;left:0;bottom: 0;font-size:32rpx;z-index: 50;}
+.btn{width:100%;background:#f4b21e;padding:25rpx;text-align: center;color:#fff;position: absolute;left:0;bottom: 0;font-size:32rpx;z-index: 50;}
 
 
 
@@ -34,6 +34,6 @@ form{width:100%;}
 .info view.sex .radio:first-child{margin-right:10%;}
 .info view.card{border-top:1px solid #E8E8E8;}
 /* 确定按钮 */
-.btn{width:100%;background:#feb70f;padding:25rpx;text-align: center;color:#fff;position: fixed;left:0;bottom: 0;font-size:32rpx;}
+.btn{width:100%;background:#f4b21e;padding:25rpx;text-align: center;color:#fff;position: fixed;left:0;bottom: 0;font-size:32rpx;}
 #address input{display: block;margin-top:24rpx;}
-.btn-area button{background-color:#feb70f;border-radius: 0;position: fixed;left:0;bottom: 0;color:#fff;width:100%;z-index: 20;}
+.btn-area button{background-color:#f4b21e;border-radius: 0;position: fixed;left:0;bottom: 0;color:#fff;width:100%;z-index: 20;}

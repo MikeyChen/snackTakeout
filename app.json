@@ -17,8 +17,8 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#feb70f",
-    "navigationBarTitleText": "云南美食之家",
+    "navigationBarBackgroundColor": "#f4b21e",
+    "navigationBarTitleText": "小吃外卖配送",
     "navigationBarTextStyle": "#fff"
   },
   "tabBar": {

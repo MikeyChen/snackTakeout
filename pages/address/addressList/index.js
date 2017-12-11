@@ -36,7 +36,7 @@ Page({
     else {
       //请求接口
       if (isAddress == "empty") {
-        console.log("没数据11111111111");
+        //console.log("没数据11111111111");
         wx.request({
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
@@ -52,8 +52,8 @@ Page({
             weixin_user_id: wx.getStorageSync("weixin_user_id")
           },
           success: function (res) {
-            console.log("scuesss");
-            console.log(res);
+           // console.log("scuesss");
+           // console.log(res);
               that.setData({
                 isShow: 'isShow',
                 isHide: 'isHide',
@@ -65,7 +65,7 @@ Page({
         })
 
       } else {
-        console.log("有数据222222222");
+        //console.log("有数据222222222");
         wx.request({
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
